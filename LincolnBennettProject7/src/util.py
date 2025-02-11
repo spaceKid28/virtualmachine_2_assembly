@@ -186,23 +186,71 @@ def write_file(filename, lines, extension):
             # add new line character at the end of each line
             outputfile.write(f"{line + '\n'}")
 
-def push_constant(line):
+def constant(line):
     line = line.split(" ")
     num = line[-1]
-    new_lines = ["//push constant operation", f"@{num}", "D=A", "@SP", "AM=M+1","A=A-1", "M=D", ""]
+    if "push" in line[0]:
+        new_lines = ["//push constant operation", f"@{num}", "D=A", "@SP", "A=M", "M=D", "@SP", "M=M+1", ""]
+        return new_lines
+    elif "pop" in line[0]:
+        raise Exception(f"pop constant {num} is not a valid command")
+
+def local_func(line):
+    mem_hmap = {"temp": "5", "local": "LCL", "argument":"ARG", "this": "THIS", "that":"THAT"}
+    line = line.split(" ")
+    num = line[-1]
+    mem_location = mem_hmap[line[1]]
+    print(mem_location)
+    if "push" in line[0]:
+        # temp causing problems, added an if statement
+        if mem_location != "5":
+            new_lines = [f"//push {mem_location} {num} operation", f"@{mem_location}", "D=M", f"@{num}", f"A=D+A", "D=M //stores value in D register of RAM[{mem_location} + x]", "@SP", "A=M", "M=D //set value at top of stack to D", "@SP", "M=M+1 //increment stack pointer", ""]
+        else:
+            new_lines = [f"//push {mem_location} {num} operation", f"@{mem_location}", "D=A", f"@{num}", f"A=D+A", "D=M //stores value in D register of RAM[{mem_location} + x]", "@SP", "A=M", "M=D //set value at top of stack to D", "@SP", "M=M+1 //increment stack pointer", ""]
+    
+    elif "pop" in line[0]:
+        if mem_location != "5":
+            new_lines = [f"//pop {mem_location} {num} operation", f"@{mem_location}", "D=M", f"@{num}", "D=D+A", "@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D", ""]
+        else:
+            new_lines = [f"//pop {mem_location} {num} operation", f"@{mem_location}", "D=A", f"@{num}", "D=D+A", "@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D", ""]
+            print(new_lines)
     return new_lines
+
+def pointer(line):
+    pattern_match = {"pointer 0": "THIS", "pointer 1":"THAT"}
+    line = line.split(" ")
+    thisThat = pattern_match[" ".join(line[1:])]
+
+    if "push" in line[0]:
+        new_lines = [f"//push {" ".join(line[1:])} operation", f"@{thisThat}", "D=M", "@SP", "A=M", "M=D", "@SP", "M=M+1 //increment stack pointer", ""]
+       
+    elif "pop" in line[0]:
+        new_lines = [f"//pop {" ".join(line[1:])} operation", "@SP", "AM=M-1", "D=M", f"@{thisThat}", "M=D", ""]
+    return new_lines
+
+def static_helper(line, filename):
+    filename = filename.split('/')[-1].split(".")[0]
+    line = line.split(" ")
+
+    if "push" in line[0]:
+        new_lines = [f"//{" ".join(line)} operation", f"@{filename}.{line[-1]}", "D=M", "@SP", "A=M", "M=D", "@SP", "M=M+1 //increment stack pointer", ""]
+       
+    elif "pop" in line[0]:
+        new_lines = [f"//{" ".join(line)} operation", "@SP", "AM=M-1", "D=M", f"@{filename}.{line[-1]}", "M=D", ""]
+    return new_lines
+
             
 arithmetic_operations = {
-    "add" : ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"],
-    "sub" : ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D-M"], 
+    "add" : ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M", ""],
+    "sub" : ["@SP", "AM=M-1", "D=M", "A=A-1", "M=M-D", ""], 
     "gt" : ["@SP", "AM=M-1", "D=M", "A=A-1", "D=M-D", "M=-1", "@continue", "D;JGT", "@SP", "A=M-1","M=0", "(continue)", ""], 
-    "not" : ["@SP", "A=M-1", "A=M", "M=!M", "@SP", "M=M+1", ""],
+    "not" : ["@SP", "A=M-1", "M=!M", ""],
+    "or": ["@SP", "M=M-1", "A=M", "D=M", "@SP", "M=M-1", "A=M", "M=D|M", "@SP", "M=M+1", ""],
 
     "neg": ["@SP", "A=M-1", "M=-M", ""],
     "eq": ["@SP", "AM=M-1", "D=M", "A=A-1", "D=M-D", "M=-1", "@continue", "D;JEQ", "@SP", "A=M-1", "M=0", "(continue)", ""],
     "lt": ["@SP", "AM=M-1", "D=M", "A=A-1", "D=M-D", "M=-1", "@continue", "D;JLT", "@SP", "A=M-1", "M=0", "(continue)", ""],
-    "and": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D&M", ""],
-    "or": ["@SP", "M=M-1", "A=M", "D=M", "@SP", "M=M-1", "A=M", "M=D|M", "@SP", "M=M+1", ""]
+    "and": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D&M", ""]
 }
 
 

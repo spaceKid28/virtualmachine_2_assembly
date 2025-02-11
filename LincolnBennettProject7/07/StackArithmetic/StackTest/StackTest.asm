@@ -2,17 +2,19 @@
 @17
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @17
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //eq
 @SP
@@ -32,17 +34,19 @@ M=0
 @17
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @16
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //eq
 @SP
@@ -62,17 +66,19 @@ M=0
 @16
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @17
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //eq
 @SP
@@ -92,17 +98,19 @@ M=0
 @892
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @891
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //lt
 @SP
@@ -122,17 +130,19 @@ M=0
 @891
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @892
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //lt
 @SP
@@ -152,17 +162,19 @@ M=0
 @891
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @891
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //lt
 @SP
@@ -182,17 +194,19 @@ M=0
 @32767
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @32766
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //gt
 @SP
@@ -212,17 +226,19 @@ M=0
 @32766
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @32767
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //gt
 @SP
@@ -242,17 +258,19 @@ M=0
 @32766
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @32766
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //gt
 @SP
@@ -272,25 +290,28 @@ M=0
 @57
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @31
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //push constant operation
 @53
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //add
 @SP
@@ -298,20 +319,23 @@ AM=M-1
 D=M
 A=A-1
 M=D+M
+
 //push constant operation
 @112
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //sub
 @SP
 AM=M-1
 D=M
 A=A-1
-M=D-M
+M=M-D
+
 //neg
 @SP
 A=M-1
@@ -328,9 +352,10 @@ M=D&M
 @82
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
+@SP
+M=M+1
 
 //or
 @SP
@@ -347,8 +372,5 @@ M=M+1
 //not
 @SP
 A=M-1
-A=M
 M=!M
-@SP
-M=M+1
 
