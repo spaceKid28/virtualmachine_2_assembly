@@ -178,7 +178,7 @@ def symbolless_assembler(input):
 def write_file(filename, lines, extension):
     # Convert relative path to absolute path and strip .in extension
 
-    filename = "".join(filename.split('.')[:-1])
+    filename = os.path.splitext(filename)[0]
     filename = os.path.abspath(filename)
     
     with open(f"{filename}.{extension}", "w") as outputfile:
@@ -195,32 +195,37 @@ def constant(line):
     elif "pop" in line[0]:
         raise Exception(f"pop constant {num} is not a valid command")
 
-def local_func(line):
+# define push and pop for stack variables
+def stackvar(line):
+    # create a hashmap for VM to Assembly memory locations
     mem_hmap = {"temp": "5", "local": "LCL", "argument":"ARG", "this": "THIS", "that":"THAT"}
     line = line.split(" ")
+    # num represents the offset, for example. num = 5 in "push local 5"
     num = line[-1]
+    # changes local to LCL in "push local 5"
     mem_location = mem_hmap[line[1]]
-    print(mem_location)
+    # if statements to write push and pop
     if "push" in line[0]:
-        # temp causing problems, added an if statement
+        # temp has slightly different command
         if mem_location != "5":
             new_lines = [f"//push {mem_location} {num} operation", f"@{mem_location}", "D=M", f"@{num}", f"A=D+A", "D=M //stores value in D register of RAM[{mem_location} + x]", "@SP", "A=M", "M=D //set value at top of stack to D", "@SP", "M=M+1 //increment stack pointer", ""]
         else:
             new_lines = [f"//push {mem_location} {num} operation", f"@{mem_location}", "D=A", f"@{num}", f"A=D+A", "D=M //stores value in D register of RAM[{mem_location} + x]", "@SP", "A=M", "M=D //set value at top of stack to D", "@SP", "M=M+1 //increment stack pointer", ""]
-    
+    # same logic fo pop
     elif "pop" in line[0]:
         if mem_location != "5":
             new_lines = [f"//pop {mem_location} {num} operation", f"@{mem_location}", "D=M", f"@{num}", "D=D+A", "@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D", ""]
         else:
             new_lines = [f"//pop {mem_location} {num} operation", f"@{mem_location}", "D=A", f"@{num}", "D=D+A", "@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D", ""]
-            print(new_lines)
     return new_lines
 
+# define push and pop for pointer
 def pointer(line):
+    # again, we use hash map to translate VM language location to assembly location
     pattern_match = {"pointer 0": "THIS", "pointer 1":"THAT"}
     line = line.split(" ")
     thisThat = pattern_match[" ".join(line[1:])]
-
+# if statements to write push and pop
     if "push" in line[0]:
         new_lines = [f"//push {" ".join(line[1:])} operation", f"@{thisThat}", "D=M", "@SP", "A=M", "M=D", "@SP", "M=M+1 //increment stack pointer", ""]
        
@@ -228,8 +233,10 @@ def pointer(line):
         new_lines = [f"//pop {" ".join(line[1:])} operation", "@SP", "AM=M-1", "D=M", f"@{thisThat}", "M=D", ""]
     return new_lines
 
+# define push and pop for static
 def static_helper(line, filename):
-    filename = filename.split('/')[-1].split(".")[0]
+    # we want to take ONLY the filename for our static variable location "filename.5"
+    filename = filename.split('\\')[-1].replace('.vm', '')
     line = line.split(" ")
 
     if "push" in line[0]:
@@ -239,7 +246,7 @@ def static_helper(line, filename):
         new_lines = [f"//{" ".join(line)} operation", "@SP", "AM=M-1", "D=M", f"@{filename}.{line[-1]}", "M=D", ""]
     return new_lines
 
-            
+# arithmetic oeparations, I hardcoded into a hashmap
 arithmetic_operations = {
     "add" : ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M", ""],
     "sub" : ["@SP", "AM=M-1", "D=M", "A=A-1", "M=M-D", ""], 
