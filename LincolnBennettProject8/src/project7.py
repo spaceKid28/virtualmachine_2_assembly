@@ -1,5 +1,5 @@
 import os
-from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper
+from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper, ifgoto
 
 
 def main(filename):
@@ -31,6 +31,19 @@ def main(filename):
         # for example push local 5 would evalute to true, as local is a stack variable (and in operators list)
         elif any(x in line for x in operators):
             new_lines = new_lines + stackvar(line)
+        
+        elif "label" in line:
+            # label command is easy
+            new_lines = new_lines + ["(" + line.split(" ")[-1] + ")"]
+
+        # if-goto
+        elif "if-goto" in line:
+            new_lines = new_lines + ifgoto(line)
+
+        else:
+            new_lines = new_lines + [line]
+
+
     # write file with correct extensions
     write_file(filename, new_lines, "asm")
     return

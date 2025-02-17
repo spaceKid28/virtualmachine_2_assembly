@@ -246,6 +246,12 @@ def static_helper(line, filename):
         new_lines = [f"//{" ".join(line)} operation", "@SP", "AM=M-1", "D=M", f"@{filename}.{line[-1]}", "M=D", ""]
     return new_lines
 
+# if-goto LOOP_START  // If counter != 0, goto LOOP_START
+def ifgoto(line):
+    label = line.split(" ")[-1]
+    new_lines = [f"// {line} opeartion", "@SP", "AM=M-1", "D=M", "@{label}", "D;JNE", " "]
+    return new_lines
+
 # arithmetic oeparations, I hardcoded into a hashmap
 arithmetic_operations = {
     "add" : ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M", ""],
