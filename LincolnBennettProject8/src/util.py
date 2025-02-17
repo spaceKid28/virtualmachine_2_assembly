@@ -236,7 +236,7 @@ def pointer(line):
 # define push and pop for static
 def static_helper(line, filename):
     # we want to take ONLY the filename for our static variable location "filename.5"
-    filename = filename.split('\\')[-1].replace('.vm', '')
+    filename = filename.split('/')[-1].replace('.vm', '')
     line = line.split(" ")
 
     if "push" in line[0]:
