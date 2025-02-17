@@ -1,6 +1,6 @@
 import sys
 import os
-from src.project7 import main
+from src.project8 import main
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:

@@ -1,5 +1,5 @@
 import os
-from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper, ifgoto
+from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper, ifgoto, goto
 
 
 def main(filename):
@@ -39,6 +39,10 @@ def main(filename):
         # if-goto
         elif "if-goto" in line:
             new_lines = new_lines + ifgoto(line)
+        
+        #goto command, we put it after if-goto because we don't want it to match on a if-goto
+        elif "goto" in line:
+            new_lines = new_lines + goto(line)
 
         else:
             new_lines = new_lines + [line]

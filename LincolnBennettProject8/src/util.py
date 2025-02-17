@@ -252,6 +252,11 @@ def ifgoto(line):
     new_lines = [f"// {line} opeartion", "@SP", "AM=M-1", "D=M", f"@{label}", "D;JNE", " "]
     return new_lines
 
+def goto(line):
+    label = line.split(" ")[-1]
+    new_lines = [f"// {line} opeartion", f"@{label}", "D;JMP", " "]
+    return new_lines
+
 # arithmetic oeparations, I hardcoded into a hashmap
 arithmetic_operations = {
     "add" : ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M", ""],
