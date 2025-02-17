@@ -125,7 +125,7 @@ M=M+1 //increment stack pointer
 @SP
 AM=M-1
 D=M
-@{label}
+@LOOP_START
 D;JNE
  
 //push LCL 0 operation

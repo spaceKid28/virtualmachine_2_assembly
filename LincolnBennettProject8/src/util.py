@@ -249,7 +249,7 @@ def static_helper(line, filename):
 # if-goto LOOP_START  // If counter != 0, goto LOOP_START
 def ifgoto(line):
     label = line.split(" ")[-1]
-    new_lines = [f"// {line} opeartion", "@SP", "AM=M-1", "D=M", "@{label}", "D;JNE", " "]
+    new_lines = [f"// {line} opeartion", "@SP", "AM=M-1", "D=M", f"@{label}", "D;JNE", " "]
     return new_lines
 
 # arithmetic oeparations, I hardcoded into a hashmap
