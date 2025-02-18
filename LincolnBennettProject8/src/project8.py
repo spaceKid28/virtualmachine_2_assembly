@@ -6,7 +6,8 @@ def main(filename):
     lines = parser(filename)
     print(filename)
     # new lines is list of lines that we will pass to write_file
-    new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", "@Sys.init", "0;JMP", " "]
+    # new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", "@Sys.init", "0;JMP", " "]
+    new_lines = []
     # create multiple continues that we can use later
     continues = [f"continue{x}" for x in range(10000)]
     operators = ["local", "argument", "this", "that", "temp"]
