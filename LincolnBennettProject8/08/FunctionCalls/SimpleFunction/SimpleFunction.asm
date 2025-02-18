@@ -1,3 +1,11 @@
+//bootstrap code 
+@256
+D=A
+@SP
+M=D
+@Sys.init
+0;JMP
+ 
 // function SimpleFunction.test 2 operation
 @SP
 AM=M+1 //increment stack pointer and address in A

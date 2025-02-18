@@ -1,5 +1,23 @@
 import os
 
+def combine_multiple_vm_files(filepath):
+    ''' this function takes a filepath pointing to a folder, and returns a list of all the lines '''
+    combined_lines = []
+    
+    # Check if the input is a directory
+    if os.path.isdir(filepath):
+        # Process all .vm files in the directory
+        for file in os.listdir(filepath):
+            if file.endswith('.vm'):
+                # create temporary filepath to read using os
+                tmp_filepath = os.path.join(filepath, file)
+                with open(tmp_filepath, 'r') as f:
+                    combined_lines.extend(f.readlines())
+    
+    # write to new file
+    with open(filepath + ".vm", 'w') as f:
+        f.writelines(combined_lines)
+    return filepath + ".vm"
 def parser(filename):
     lines = []
     # Convert relative path to absolute path
@@ -272,6 +290,20 @@ def ret(line):
                 "//ARG = *(R13-3), restore ARG of the caller", "@R13", "AM=M-1", "D=M", "@ARG", "M=D",
                 "//LCL = *(R13-4), restore ARG of the caller", "@13", "AM=M-1", "D=M", "@LCL", "M=D",
                 "//goto *R14", "@R14", "A=M", "0;JMP", " "
+    ]
+    return new_lines
+
+def call(line, label):
+    n = int(line.split(" ")[-1])
+    func_name = line.split(" ")[1]
+    new_lines = [f"// {line} operation", 
+                "//push return address", f"@{label}", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D", " ",
+                "//push LCL", "@LCL", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D", " ",
+                "//push ARG ", "@ARG", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D", " ",
+                "//push THIS ", "@THIS", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D", " ",
+                "//push THAT ", "@THAT", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D", " ",
+                "//ARG = SP - n - 5", "@SP", "D=M", f"@{n+5}", "D=D-A", "@ARG", "M=D", " ",
+                "//LCL = SP", "@SP", "D=M", "@LCL", "M=D", f"@{func_name}", "0;JMP", f"({label})", " "     
     ]
     return new_lines
 
