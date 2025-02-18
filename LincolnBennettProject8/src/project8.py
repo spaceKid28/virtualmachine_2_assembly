@@ -1,12 +1,12 @@
 import os
-from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper, ifgoto, goto
+from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper, ifgoto, goto, func, ret
 
 
 def main(filename):
     lines = parser(filename)
     print(filename)
     # new lines is list of lines that we will pass to write_file
-    new_lines = []
+    new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", "@Sys.init", "0;JMP", " "]
     # create multiple continues that we can use later
     continues = [f"continue{x}" for x in range(10000)]
     operators = ["local", "argument", "this", "that", "temp"]
@@ -43,6 +43,12 @@ def main(filename):
         #goto command, we put it after if-goto because we don't want it to match on a if-goto
         elif "goto" in line:
             new_lines = new_lines + goto(line)
+        
+        elif "function" in line:
+            new_lines = new_lines + func(line)
+        
+        elif "return" in line:
+            new_lines = new_lines + ret(line)
 
         else:
             new_lines = new_lines + [line]

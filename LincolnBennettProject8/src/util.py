@@ -249,12 +249,30 @@ def static_helper(line, filename):
 # if-goto LOOP_START  // If counter != 0, goto LOOP_START
 def ifgoto(line):
     label = line.split(" ")[-1]
-    new_lines = [f"// {line} opeartion", "@SP", "AM=M-1", "D=M", f"@{label}", "D;JNE", " "]
+    new_lines = [f"// {line} operation", "@SP", "AM=M-1", "D=M", f"@{label}", "D;JNE", " "]
     return new_lines
 
 def goto(line):
     label = line.split(" ")[-1]
-    new_lines = [f"// {line} opeartion", f"@{label}", "D;JMP", " "]
+    new_lines = [f"// {line} operation", f"@{label}", "D;JMP", " "]
+    return new_lines
+
+def func(line):
+    k = int(line.split(" ")[-1])
+    new_lines = [f"// {line} operation"] +  k * ["@SP", "AM=M+1 //increment stack pointer and address in A", "A=A-1 //Note, we have already incremented SP, we adjust to set to 0", "M=0", " "]
+    return new_lines
+
+def ret(line):
+    new_lines = [f"// {line} operation", "//R13=LCL", "@LCL", "D=M", "@R13", "M=D",
+                "//R14 = *(R13 - 5)", "@LCL", "D=M", "@5", "A=D-A", "D=M", "@R14", "M=D",
+                "//*ARG = pop(), ", "@SP", "D=M", "A=M-1", "@ARG", "A=M", "M=D",
+                "//SP =ARG+1 restore the SP of the caller", "@ARG", "D=M+1", "@SP", "M=D",
+                "//THAT = *(R13-1), restore THAT of the caller", "@R13", "AM = M-1", "D=M", "@THAT", "M=D",
+                "//THIS = *(R13-2), restore THIS of the caller", "@R13", "AM = M-1", "D=M", "@THIS", "M=D",
+                "//ARG = *(R13-3), restore ARG of the caller", "@R13", "AM = M-1", "D=M", "@ARG", "M=D",
+                "//LCL = *(R13-4), restore ARG of the caller", "@R13", "AM = M-1", "D=M", "@LCL", "M=D",
+                "//goto *R14", "@R14", "A=M", "0;JMP", " "
+    ]
     return new_lines
 
 # arithmetic oeparations, I hardcoded into a hashmap
