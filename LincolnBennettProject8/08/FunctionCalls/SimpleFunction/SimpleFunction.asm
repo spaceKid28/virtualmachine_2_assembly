@@ -107,7 +107,6 @@ D=M
 M=D
 //*ARG = pop(), 
 @SP
-D=M
 A=M-1
 @ARG
 A=M
