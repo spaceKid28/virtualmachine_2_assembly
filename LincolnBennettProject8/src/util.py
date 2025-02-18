@@ -270,7 +270,7 @@ def ret(line):
                 "//THAT = *(R13-1), restore THAT of the caller", "@R13", "AM=M-1", "D=M", "@THAT", "M=D",
                 "//THIS = *(R13-2), restore THIS of the caller", "@R13", "AM=M-1", "D=M", "@THIS", "M=D",
                 "//ARG = *(R13-3), restore ARG of the caller", "@R13", "AM=M-1", "D=M", "@ARG", "M=D",
-                "//LCL = *(R13-4), restore ARG of the caller", "@R13", "AM=M-1", "D=M", "@LCL", "M=D",
+                "//LCL = *(R13-4), restore ARG of the caller", "@13", "AM=M-1", "D=M", "@LCL", "M=D",
                 "//goto *R14", "@R14", "A=M", "0;JMP", " "
     ]
     return new_lines
