@@ -267,10 +267,10 @@ def ret(line):
                 "//R14 = *(R13 - 5)", "@LCL", "D=M", "@5", "A=D-A", "D=M", "@R14", "M=D",
                 "//*ARG = pop(), ", "@SP", "A=M-1", "@ARG", "A=M", "M=D",
                 "//SP =ARG+1 restore the SP of the caller", "@ARG", "D=M+1", "@SP", "M=D",
-                "//THAT = *(R13-1), restore THAT of the caller", "@R13", "AM = M-1", "D=M", "@THAT", "M=D",
-                "//THIS = *(R13-2), restore THIS of the caller", "@R13", "AM = M-1", "D=M", "@THIS", "M=D",
-                "//ARG = *(R13-3), restore ARG of the caller", "@R13", "AM = M-1", "D=M", "@ARG", "M=D",
-                "//LCL = *(R13-4), restore ARG of the caller", "@R13", "AM = M-1", "D=M", "@LCL", "M=D",
+                "//THAT = *(R13-1), restore THAT of the caller", "@R13", "AM=M-1", "D=M", "@THAT", "M=D",
+                "//THIS = *(R13-2), restore THIS of the caller", "@R13", "AM=M-1", "D=M", "@THIS", "M=D",
+                "//ARG = *(R13-3), restore ARG of the caller", "@R13", "AM=M-1", "D=M", "@ARG", "M=D",
+                "//LCL = *(R13-4), restore ARG of the caller", "@R13", "AM=M-1", "D=M", "@LCL", "M=D",
                 "//goto *R14", "@R14", "A=M", "0;JMP", " "
     ]
     return new_lines
