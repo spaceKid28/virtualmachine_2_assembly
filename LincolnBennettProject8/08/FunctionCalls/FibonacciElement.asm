@@ -63,6 +63,7 @@ M=D
 (call_counter_1)
  
 // function Sys.init 0 operation
+Sys.init
 //push constant operation
 @4
 D=A
@@ -136,6 +137,7 @@ M=D
 D;JMP
  
 // function Main.fibonacci 0 operation
+Main.fibonacci
 //push ARG 0 operation
 @ARG
 D=M

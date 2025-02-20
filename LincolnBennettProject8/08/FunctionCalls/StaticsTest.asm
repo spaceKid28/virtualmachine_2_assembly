@@ -3,29 +3,8 @@
 D=A
 @SP
 M=D
-@Sys.init
-0;JMP
  
-// function Sys.init 0 operation
-//push constant operation
-@6
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1
-
-//push constant operation
-@8
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1
-
-// call Class1.set 2 operation
+// call sys.init 0 operation
 //push return address
 @call_counter_1
 D=A
@@ -69,7 +48,7 @@ M=D
 //ARG = SP - n - 5
 @SP
 D=M
-@7
+@5
 D=D-A
 @ARG
 M=D
@@ -79,26 +58,13 @@ M=D
 D=M
 @LCL
 M=D
-@Class1.set
+@sys.init
 0;JMP
 (call_counter_1)
  
-//pop 5 0 operation
-@5
-D=A
-@0
-D=D+A
-@R13
-M=D
-@SP
-AM=M-1
-D=M
-@R13
-A=M
-M=D
-
+// function Sys.init 0 operation
 //push constant operation
-@23
+@6
 D=A
 @SP
 A=M
@@ -107,7 +73,7 @@ M=D
 M=M+1
 
 //push constant operation
-@15
+@8
 D=A
 @SP
 A=M
@@ -115,7 +81,7 @@ M=D
 @SP
 M=M+1
 
-// call Class2.set 2 operation
+// call Class1.set 2 operation
 //push return address
 @call_counter_2
 D=A
@@ -169,7 +135,7 @@ M=D
 D=M
 @LCL
 M=D
-@Class2.set
+@Class1.set
 0;JMP
 (call_counter_2)
  
@@ -186,8 +152,26 @@ D=M
 @R13
 A=M
 M=D
+ 
+//push constant operation
+@23
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
 
-// call Class1.get 0 operation
+//push constant operation
+@15
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+
+// call Class2.set 2 operation
 //push return address
 @call_counter_3
 D=A
@@ -231,7 +215,7 @@ M=D
 //ARG = SP - n - 5
 @SP
 D=M
-@5
+@7
 D=D-A
 @ARG
 M=D
@@ -241,11 +225,25 @@ M=D
 D=M
 @LCL
 M=D
-@Class1.get
+@Class2.set
 0;JMP
 (call_counter_3)
  
-// call Class2.get 0 operation
+//pop 5 0 operation
+@5
+D=A
+@0
+D=D+A
+@R13
+M=D
+@SP
+AM=M-1
+D=M
+@R13
+A=M
+M=D
+ 
+// call Class1.get 0 operation
 //push return address
 @call_counter_4
 D=A
@@ -299,9 +297,67 @@ M=D
 D=M
 @LCL
 M=D
-@Class2.get
+@Class1.get
 0;JMP
 (call_counter_4)
+ 
+// call Class2.get 0 operation
+//push return address
+@call_counter_5
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push LCL
+@LCL
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push ARG 
+@ARG
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push THIS 
+@THIS
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push THAT 
+@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//ARG = SP - n - 5
+@SP
+D=M
+@5
+D=D-A
+@ARG
+M=D
+ 
+//LCL = SP
+@SP
+D=M
+@LCL
+M=D
+@Class2.get
+0;JMP
+(call_counter_5)
  
 (WHILE)
 // goto WHILE operation
