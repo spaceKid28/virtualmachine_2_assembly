@@ -277,7 +277,7 @@ def goto(line):
 
 def func(line):
     k = int(line.split(" ")[-1])
-    new_lines = [f"// {line} operation"] + [str(line.split(" ")[1])] + k * ["@SP", "AM=M+1 //increment stack pointer and address in A", "A=A-1 //Note, we have already incremented SP, we adjust to set to 0", "M=0", " "]
+    new_lines = [f"// {line} operation"] + [f"({line.split(" ")[1]}"] + k * ["@SP", "AM=M+1 //increment stack pointer and address in A", "A=A-1 //Note, we have already incremented SP, we adjust to set to 0", "M=0", " "]
     return new_lines
 
 def ret(line):
