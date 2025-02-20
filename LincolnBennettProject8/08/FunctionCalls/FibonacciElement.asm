@@ -134,7 +134,7 @@ M=D
 (WHILE)
 // goto WHILE operation
 @WHILE
-D;JMP
+0;JMP
  
 // function Main.fibonacci 0 operation
 (Main.fibonacci)
@@ -182,7 +182,7 @@ D;JNE
  
 // goto IF_FALSE operation
 @IF_FALSE
-D;JMP
+0;JMP
  
 (IF_TRUE)
 //push ARG 0 operation
@@ -197,61 +197,56 @@ M=D //set value at top of stack to D
 @SP
 M=M+1 //increment stack pointer
 
-// return operation
-//R13=LCL
 @LCL
 D=M
-@R13
+@13
 M=D
-//R14 = *(R13 - 5)
-@LCL
-D=M
+
 @5
 A=D-A
 D=M
-@R14
+@14
 M=D
-//*ARG = pop(), 
+
 @SP
-A=M-1
+AM=M-1
 D=M
 @ARG
 A=M
 M=D
-//SP =ARG+1 restore the SP of the caller
+
 @ARG
 D=M+1
 @SP
 M=D
-//THAT = *(R13-1), restore THAT of the caller
-@R13
+@13
 AM=M-1
 D=M
 @THAT
 M=D
-//THIS = *(R13-2), restore THIS of the caller
-@R13
+
+@13
 AM=M-1
 D=M
 @THIS
 M=D
-//ARG = *(R13-3), restore ARG of the caller
-@R13
+
+@13
 AM=M-1
 D=M
 @ARG
 M=D
-//LCL = *(R13-4), restore ARG of the caller
+
 @13
 AM=M-1
 D=M
 @LCL
 M=D
-//goto *R14
-@R14
+
+@14
 A=M
 0;JMP
- 
+
 (IF_FALSE)
 //push ARG 0 operation
 @ARG
@@ -432,58 +427,53 @@ D=M
 A=A-1
 M=D+M
 
-// return operation
-//R13=LCL
 @LCL
 D=M
-@R13
+@13
 M=D
-//R14 = *(R13 - 5)
-@LCL
-D=M
+
 @5
 A=D-A
 D=M
-@R14
+@14
 M=D
-//*ARG = pop(), 
+
 @SP
-A=M-1
+AM=M-1
 D=M
 @ARG
 A=M
 M=D
-//SP =ARG+1 restore the SP of the caller
+
 @ARG
 D=M+1
 @SP
 M=D
-//THAT = *(R13-1), restore THAT of the caller
-@R13
+@13
 AM=M-1
 D=M
 @THAT
 M=D
-//THIS = *(R13-2), restore THIS of the caller
-@R13
+
+@13
 AM=M-1
 D=M
 @THIS
 M=D
-//ARG = *(R13-3), restore ARG of the caller
-@R13
+
+@13
 AM=M-1
 D=M
 @ARG
 M=D
-//LCL = *(R13-4), restore ARG of the caller
+
 @13
 AM=M-1
 D=M
 @LCL
 M=D
-//goto *R14
-@R14
+
+@14
 A=M
 0;JMP
- 
+

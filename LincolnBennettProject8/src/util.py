@@ -272,7 +272,7 @@ def ifgoto(line):
 
 def goto(line):
     label = line.split(" ")[-1]
-    new_lines = [f"// {line} operation", f"@{label}", "D;JMP", " "]
+    new_lines = [f"// {line} operation", f"@{label}", "0;JMP", " "]
     return new_lines
 
 def func(line):
@@ -291,6 +291,16 @@ def ret(line):
                 "//LCL = *(R13-4), restore ARG of the caller", "@13", "AM=M-1", "D=M", "@LCL", "M=D",
                 "//goto *R14", "@R14", "A=M", "0;JMP", " "
     ]
+
+    new_lines = ["@LCL", "D=M", "@13", "M=D", "",  # Save the current LCL (frame pointer) in R13
+        "@5", "A=D-A", "D=M", "@14", "M=D", "",  # Save return address (LCL-5) in R14
+        "@SP", "AM=M-1", "D=M", "@ARG", "A=M", "M=D", "",  # Move return value to ARG[0] - note return value is current at *SP-1, top of current function stack 
+        "@ARG", "D=M+1", "@SP", "M=D", ""  # Reposition SP to ARG+1
+        "@13", "AM=M-1", "D=M", "@THAT", "M=D", "",  # Restore THAT of the caller
+        "@13", "AM=M-1", "D=M", "@THIS", "M=D", "",  # Restore THIS of the caller
+        "@13", "AM=M-1", "D=M", "@ARG", "M=D", "",  # Restore ARG of the caller
+        "@13", "AM=M-1", "D=M", "@LCL", "M=D", "",  # Restore LCL of the caller
+        "@14", "A=M", "0;JMP", ""]  # Jump to the return address saved in R14
     return new_lines
 
 def call(line, label):
