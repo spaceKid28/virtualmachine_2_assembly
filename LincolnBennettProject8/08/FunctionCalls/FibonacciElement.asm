@@ -3,8 +3,64 @@
 D=A
 @SP
 M=D
-@Sys.init
+ 
+// call sys.init 0 operation
+//push return address
+@call_counter_1
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push LCL
+@LCL
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push ARG 
+@ARG
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push THIS 
+@THIS
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push THAT 
+@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//ARG = SP - n - 5
+@SP
+D=M
+@5
+D=D-A
+@ARG
+M=D
+ 
+//LCL = SP
+@SP
+D=M
+@LCL
+M=D
+@sys.init
 0;JMP
+(call_counter_1)
  
 // function Sys.init 0 operation
 //push constant operation
@@ -18,7 +74,7 @@ M=M+1
 
 // call Main.fibonacci 1 operation
 //push return address
-@call_counter_1
+@call_counter_2
 D=A
 @SP
 AM=M+1
@@ -72,7 +128,7 @@ D=M
 M=D
 @Main.fibonacci
 0;JMP
-(call_counter_1)
+(call_counter_2)
  
 (WHILE)
 // goto WHILE operation
@@ -225,92 +281,6 @@ M=M-D
 
 // call Main.fibonacci 1 operation
 //push return address
-@call_counter_2
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
- 
-//push LCL
-@LCL
-D=M
-@SP
-AM=M+1
-A=A-1
-M=D
- 
-//push ARG 
-@ARG
-D=M
-@SP
-AM=M+1
-A=A-1
-M=D
- 
-//push THIS 
-@THIS
-D=M
-@SP
-AM=M+1
-A=A-1
-M=D
- 
-//push THAT 
-@THAT
-D=M
-@SP
-AM=M+1
-A=A-1
-M=D
- 
-//ARG = SP - n - 5
-@SP
-D=M
-@6
-D=D-A
-@ARG
-M=D
- 
-//LCL = SP
-@SP
-D=M
-@LCL
-M=D
-@Main.fibonacci
-0;JMP
-(call_counter_2)
- 
-//push ARG 0 operation
-@ARG
-D=M
-@0
-A=D+A
-D=M //stores value in D register of RAM[{mem_location} + x]
-@SP
-A=M
-M=D //set value at top of stack to D
-@SP
-M=M+1 //increment stack pointer
-
-//push constant operation
-@1
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1
-
-//sub
-@SP
-AM=M-1
-D=M
-A=A-1
-M=M-D
-
-// call Main.fibonacci 1 operation
-//push return address
 @call_counter_3
 D=A
 @SP
@@ -366,6 +336,92 @@ M=D
 @Main.fibonacci
 0;JMP
 (call_counter_3)
+ 
+//push ARG 0 operation
+@ARG
+D=M
+@0
+A=D+A
+D=M //stores value in D register of RAM[{mem_location} + x]
+@SP
+A=M
+M=D //set value at top of stack to D
+@SP
+M=M+1 //increment stack pointer
+
+//push constant operation
+@1
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+
+//sub
+@SP
+AM=M-1
+D=M
+A=A-1
+M=M-D
+
+// call Main.fibonacci 1 operation
+//push return address
+@call_counter_4
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push LCL
+@LCL
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push ARG 
+@ARG
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push THIS 
+@THIS
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push THAT 
+@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//ARG = SP - n - 5
+@SP
+D=M
+@6
+D=D-A
+@ARG
+M=D
+ 
+//LCL = SP
+@SP
+D=M
+@LCL
+M=D
+@Main.fibonacci
+0;JMP
+(call_counter_4)
  
 //add
 @SP

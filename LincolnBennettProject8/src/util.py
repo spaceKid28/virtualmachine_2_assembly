@@ -232,9 +232,9 @@ def stackvar(line):
     # same logic fo pop
     elif "pop" in line[0]:
         if mem_location != "5":
-            new_lines = [f"//pop {mem_location} {num} operation", f"@{mem_location}", "D=M", f"@{num}", "D=D+A", "@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D", ""]
+            new_lines = [f"//pop {mem_location} {num} operation", f"@{mem_location}", "D=M", f"@{num}", "D=D+A", "@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D", " "]
         else:
-            new_lines = [f"//pop {mem_location} {num} operation", f"@{mem_location}", "D=A", f"@{num}", "D=D+A", "@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D", ""]
+            new_lines = [f"//pop {mem_location} {num} operation", f"@{mem_location}", "D=A", f"@{num}", "D=D+A", "@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D", " "]
     return new_lines
 
 # define push and pop for pointer
