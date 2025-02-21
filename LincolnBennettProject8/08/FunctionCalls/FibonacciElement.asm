@@ -197,56 +197,61 @@ M=D //set value at top of stack to D
 @SP
 M=M+1 //increment stack pointer
 
+// return operation
+//R13=LCL
 @LCL
 D=M
-@13
+@R13
 M=D
-
+//R14 = *(R13 - 5)
+@LCL
+D=M
 @5
 A=D-A
 D=M
-@14
+@R14
 M=D
-
+//*ARG = pop(), 
 @SP
-AM=M-1
+A=M-1
 D=M
 @ARG
 A=M
 M=D
-
+//SP =ARG+1 restore the SP of the caller
 @ARG
 D=M+1
 @SP
 M=D
-@13
+//THAT = *(R13-1), restore THAT of the caller
+@R13
 AM=M-1
 D=M
 @THAT
 M=D
-
-@13
+//THIS = *(R13-2), restore THIS of the caller
+@R13
 AM=M-1
 D=M
 @THIS
 M=D
-
-@13
+//ARG = *(R13-3), restore ARG of the caller
+@R13
 AM=M-1
 D=M
 @ARG
 M=D
-
+//LCL = *(R13-4), restore ARG of the caller
 @13
 AM=M-1
 D=M
 @LCL
 M=D
-
-@14
+//goto *R14
+@R14
 A=M
 0;JMP
-
+ 
 (IF_FALSE)
 //push ARG 0 operation
 @ARG
@@ -427,53 +432,58 @@ D=M
 A=A-1
 M=D+M
 
+// return operation
+//R13=LCL
 @LCL
 D=M
-@13
+@R13
 M=D
-
+//R14 = *(R13 - 5)
+@LCL
+D=M
 @5
 A=D-A
 D=M
-@14
+@R14
 M=D
-
+//*ARG = pop(), 
 @SP
-AM=M-1
+A=M-1
 D=M
 @ARG
 A=M
 M=D
-
+//SP =ARG+1 restore the SP of the caller
 @ARG
 D=M+1
 @SP
 M=D
-@13
+//THAT = *(R13-1), restore THAT of the caller
+@R13
 AM=M-1
 D=M
 @THAT
 M=D
-
-@13
+//THIS = *(R13-2), restore THIS of the caller
+@R13
 AM=M-1
 D=M
 @THIS
 M=D
-
-@13
+//ARG = *(R13-3), restore ARG of the caller
+@R13
 AM=M-1
 D=M
 @ARG
 M=D
-
+//LCL = *(R13-4), restore ARG of the caller
 @13
 AM=M-1
 D=M
 @LCL
 M=D
-
-@14
+//goto *R14
+@R14
 A=M
 0;JMP
-
+ 

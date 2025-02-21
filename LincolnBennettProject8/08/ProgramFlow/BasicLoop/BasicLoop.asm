@@ -1,4 +1,5 @@
-//push constant operation
+
+// push constant 0
 @0
 D=A
 @SP
@@ -7,79 +8,88 @@ M=D
 @SP
 M=M+1
 
-//pop LCL 0 operation
+// pop local 0
 @LCL
 D=M
 @0
 D=D+A
-@R13
+@addr_2
 M=D
 @SP
-AM=M-1
+M=M-1
+A=M
 D=M
-@R13
+@addr_2
 A=M
 M=D
 
+// label LOOP_START
 (LOOP_START)
-//push ARG 0 operation
+
+// push argument 0
 @ARG
 D=M
 @0
-A=D+A
-D=M //stores value in D register of RAM[{mem_location} + x]
+D=D+A
+A=D
+D=M
 @SP
 A=M
-M=D //set value at top of stack to D
+M=D
 @SP
-M=M+1 //increment stack pointer
+M=M+1
 
-//push LCL 0 operation
+// push local 0
 @LCL
 D=M
 @0
-A=D+A
-D=M //stores value in D register of RAM[{mem_location} + x]
+D=D+A
+A=D
+D=M
 @SP
 A=M
-M=D //set value at top of stack to D
+M=D
 @SP
-M=M+1 //increment stack pointer
+M=M+1
 
-//add
+// add
 @SP
-AM=M-1
+M=M-1
+A=M
 D=M
 A=A-1
-M=D+M
+D=D+M
+M=D
 
-//pop LCL 0 operation
+// pop local 0
 @LCL
 D=M
 @0
 D=D+A
-@R13
+@addr_7
 M=D
 @SP
-AM=M-1
+M=M-1
+A=M
 D=M
-@R13
+@addr_7
 A=M
 M=D
 
-//push ARG 0 operation
+// push argument 0
 @ARG
 D=M
 @0
-A=D+A
-D=M //stores value in D register of RAM[{mem_location} + x]
+D=D+A
+A=D
+D=M
 @SP
 A=M
-M=D //set value at top of stack to D
+M=D
 @SP
-M=M+1 //increment stack pointer
+M=M+1
 
-//push constant operation
+// push constant 1
 @1
 D=A
 @SP
@@ -88,55 +98,60 @@ M=D
 @SP
 M=M+1
 
-//sub
+// sub
 @SP
-AM=M-1
+M=M-1
+A=M
 D=M
 A=A-1
-M=M-D
+D=M-D
+M=D
 
-//pop ARG 0 operation
+// pop argument 0
 @ARG
 D=M
 @0
 D=D+A
-@R13
+@addr_11
 M=D
 @SP
-AM=M-1
+M=M-1
+A=M
 D=M
-@R13
+@addr_11
 A=M
 M=D
 
-//push ARG 0 operation
+// push argument 0
 @ARG
 D=M
 @0
-A=D+A
-D=M //stores value in D register of RAM[{mem_location} + x]
+D=D+A
+A=D
+D=M
 @SP
 A=M
-M=D //set value at top of stack to D
+M=D
 @SP
-M=M+1 //increment stack pointer
+M=M+1
 
-// if-goto LOOP_START opeartion
+// if-goto LOOP_START
 @SP
-AM=M-1
+M=M-1
+A=M
 D=M
 @LOOP_START
 D;JNE
- 
-//push LCL 0 operation
+
+// push local 0
 @LCL
 D=M
 @0
-A=D+A
-D=M //stores value in D register of RAM[{mem_location} + x]
+D=D+A
+A=D
+D=M
 @SP
 A=M
-M=D //set value at top of stack to D
+M=D
 @SP
-M=M+1 //increment stack pointer
-
+M=M+1
