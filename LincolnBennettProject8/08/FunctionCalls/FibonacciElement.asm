@@ -3,64 +3,56 @@
 D=A
 @SP
 M=D
- 
-// call sys.init 0 operation
-//push return address
-@call_counter_1
+
+//call sys.int
+@Sys.init$ret.0
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push LCL
+@SP
+M=M+1
 @LCL
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push ARG 
+@SP
+M=M+1
 @ARG
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push THIS 
+@SP
+M=M+1
 @THIS
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push THAT 
+@SP
+M=M+1
 @THAT
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//ARG = SP - n - 5
 @SP
-D=M
-@5
-D=D-A
-@ARG
-M=D
- 
-//LCL = SP
+M=M+1
 @SP
 D=M
 @LCL
 M=D
-@sys.init
+@5
+D=D-A
+@0
+D=D-A
+@ARG
+M=D
+@Sys.init
 0;JMP
-(call_counter_1)
+(Sys.init$ret.0)
  
 // function Sys.init 0 operation
 (Sys.init)
