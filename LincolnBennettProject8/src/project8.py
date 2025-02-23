@@ -72,7 +72,8 @@ def main(filename):
         else:
             new_lines = new_lines + [line]
 
-
+    # add exit loop
+    new_lines = new_lines + ["(EXIT)", "@EXIT", "0;JMP"]
     # write file with correct extensions
     write_file(filename, new_lines, "asm")
     # if we combined a bunch of .vm files, we delete this file as good practice

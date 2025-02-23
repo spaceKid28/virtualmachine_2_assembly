@@ -737,3 +737,6 @@ M=D
 A=M
 0;JMP
  
+(EXIT)
+@EXIT
+0;JMP
