@@ -11,8 +11,6 @@ from commentRemover import slimFile, write_cleaned_file
 import sys, os, glob
 
 
-
-
 ## variable used to keep track of global variable used along with the file name which are not defined in the asm file
 global block_track, retCounter, file_wise_labels
 block_track = 0
@@ -466,4 +464,17 @@ if __name__ == '__main__':
 
         # step-4: Write the output content to a new file
         out_file_path = os.path.join(main_path, f"{folder_name}.asm")
-        write_cleaned_file(out_file_path, total_asm_file_lines)
+
+        print(f"total_asm: {total_asm_file_lines[:10]}")
+        # write_cleaned_file(out_file_path, total_asm_file_lines)
+
+# def write_file(filename, lines, extension):
+#     # Convert relative path to absolute path and strip .in extension
+
+#     filename = os.path.splitext(filename)[0]
+#     filename = os.path.abspath(filename)
+    
+#     with open(f"{filename}.{extension}", "w") as outputfile:
+#         for line in lines:
+#             # add new line character at the end of each line
+#             outputfile.write(f"{line + '\n'}")

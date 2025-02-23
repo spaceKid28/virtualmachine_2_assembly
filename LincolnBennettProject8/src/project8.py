@@ -13,7 +13,9 @@ def main(filename):
         delete_flag = True
 
     lines = parser(filename)
+
     # new lines is list of lines that we will pass to write_file
+    # we start with setting the stack pointer to 
     new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", " "]
     lines = ["call sys.init 0"] + lines
     print(lines[:10])
