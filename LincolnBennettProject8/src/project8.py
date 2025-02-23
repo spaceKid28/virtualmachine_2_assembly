@@ -3,12 +3,11 @@ from src.util import parser, write_file, constant, arithmetic_operations, stackv
 
 
 def main(filename):
+    # flag to determine if 
     delete_flag = False
-    if filename.endswith('.vm'):
-        pass
+    if not filename.endswith('.vm'):
     # if the file doesn't end with .vm we assume it is a folder
     # our function will combine all of the .vm files into one .vm file and return the address to this .vm file
-    else:
         filename = combine_multiple_vm_files(filename)
         delete_flag = True
 
@@ -78,7 +77,6 @@ def main(filename):
     # if we combined a bunch of .vm files, we delete this file as good practice
     if delete_flag:
         #delete
-        # print(filename)
         os.remove(filename)
     return
 
