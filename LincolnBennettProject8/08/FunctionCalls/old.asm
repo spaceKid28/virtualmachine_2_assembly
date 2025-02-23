@@ -55,8 +55,55 @@ M=D
 // function Sys.init 0
 (Sys.init)
 
- 
-// function Sys.init 0 operation
+@Sys.init$ret.0
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@LCL
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@ARG
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@THIS
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@THAT
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@SP
+D=M
+@LCL
+M=D
+@5
+D=D-A
+@0
+D=D-A
+@ARG
+M=D
+@Sys.init
+0;JMP
+(Sys.init$ret.0)
+// function Sys.init 0
 (Sys.init)
 //push constant operation
 @4
