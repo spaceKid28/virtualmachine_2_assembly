@@ -1,27 +1,42 @@
 import os
 
-def combine_multiple_vm_files(filepath):
-    ''' this function takes a filepath pointing to a folder, and returns a list of all the lines '''
-    combined_lines = []
+# def combine_multiple_vm_files(filepath):
+#     ''' this function takes a filepath pointing to a folder, and returns a list of all the lines '''
+#     combined_lines = []
+    
+#     # Check if the input is a directory
+#     if os.path.isdir(filepath):
+#         # Process all .vm files in the directory
+#         for file in os.listdir(filepath):
+#             if file.endswith('.vm'):
+#                 # create temporary filepath to read using os
+#                 tmp_filepath = os.path.join(filepath, file)
+#                 with open(tmp_filepath, 'r') as f:
+#                     combined_lines.extend(f.readlines())
+#     # if last / was included in input, remove it
+#     if filepath[-1] == "/":
+#         filepath = filepath[:-1]
+#     # create new file
+#     new_filepath = f"{filepath}/{filepath.split("/")[-1]}.vm"
+#     # write to new file
+#     with open(new_filepath, 'w') as f:
+#         f.writelines(combined_lines)
+#     return new_filepath
+
+def get_vm_file_paths(directory):
+    ''' This function takes a directory path and returns a list of paths to .vm files in that directory '''
+    vm_file_paths = []
     
     # Check if the input is a directory
-    if os.path.isdir(filepath):
+    if os.path.isdir(directory):
         # Process all .vm files in the directory
-        for file in os.listdir(filepath):
+        for file in os.listdir(directory):
             if file.endswith('.vm'):
                 # create temporary filepath to read using os
-                tmp_filepath = os.path.join(filepath, file)
-                with open(tmp_filepath, 'r') as f:
-                    combined_lines.extend(f.readlines())
-    # if last / was included in input, remove it
-    if filepath[-1] == "/":
-        filepath = filepath[:-1]
-    # create new file
-    new_filepath = f"{filepath}/{filepath.split("/")[-1]}.vm"
-    # write to new file
-    with open(new_filepath, 'w') as f:
-        f.writelines(combined_lines)
-    return new_filepath
+                tmp_filepath = os.path.join(directory, file)
+                vm_file_paths.append(tmp_filepath)
+    
+    return vm_file_paths
 def parser(filename):
     lines = []
     # Convert relative path to absolute path
