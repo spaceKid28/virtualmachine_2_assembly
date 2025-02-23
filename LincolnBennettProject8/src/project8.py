@@ -17,7 +17,7 @@ def main(filename):
     # new lines is list of lines that we will pass to write_file
     # we start with setting the stack pointer to 
     new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", " "]
-    lines = ["call sys.init 0"] + lines
+    lines = ["call Sys.init 0"] + lines
     print(lines[:10])
     # create multiple continues that we can use later
     continues = [f"continue{x}" for x in range(10000)]
