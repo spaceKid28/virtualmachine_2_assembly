@@ -159,19 +159,23 @@ M=D
 @SP
 M=M+1
 
-//lt
+// lt 
 @SP
 AM=M-1
 D=M
 A=A-1
 D=M-D
-M=-1
-@continue0
+@c0_if_lt
 D;JLT
+D=0
+@c0_else
+0;JMP
+(c0_if_lt)
+D=-1
+(c0_else)
 @SP
 A=M-1
-M=0
-(continue0)
+M=D
 
 // if-goto IF_TRUE operation
 @SP
