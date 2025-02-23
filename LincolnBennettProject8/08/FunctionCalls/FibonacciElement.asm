@@ -73,63 +73,55 @@ M=D
 @SP
 M=M+1
 
-// call Main.fibonacci 1 operation
-//push return address
-@call_counter_2
+// call Main.fibonacci 1
+@Main.fibonacci$ret.1
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push LCL
+@SP
+M=M+1
 @LCL
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push ARG 
+@SP
+M=M+1
 @ARG
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push THIS 
+@SP
+M=M+1
 @THIS
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push THAT 
+@SP
+M=M+1
 @THAT
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//ARG = SP - n - 5
 @SP
-D=M
-@6
-D=D-A
-@ARG
-M=D
- 
-//LCL = SP
+M=M+1
 @SP
 D=M
 @LCL
 M=D
+@5
+D=D-A
+@1
+D=D-A
+@ARG
+M=D
 @Main.fibonacci
 0;JMP
-(call_counter_2)
+(Main.fibonacci$ret.1)
  
 (WHILE)
 // goto WHILE operation
@@ -276,63 +268,55 @@ D=M
 A=A-1
 M=M-D
 
-// call Main.fibonacci 1 operation
-//push return address
-@call_counter_3
+// call Main.fibonacci 1
+@Main.fibonacci$ret.2
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push LCL
+@SP
+M=M+1
 @LCL
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push ARG 
+@SP
+M=M+1
 @ARG
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push THIS 
+@SP
+M=M+1
 @THIS
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push THAT 
+@SP
+M=M+1
 @THAT
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//ARG = SP - n - 5
 @SP
-D=M
-@6
-D=D-A
-@ARG
-M=D
- 
-//LCL = SP
+M=M+1
 @SP
 D=M
 @LCL
 M=D
+@5
+D=D-A
+@1
+D=D-A
+@ARG
+M=D
 @Main.fibonacci
 0;JMP
-(call_counter_3)
+(Main.fibonacci$ret.2)
  
 //push ARG 0 operation
 @ARG
@@ -362,63 +346,55 @@ D=M
 A=A-1
 M=M-D
 
-// call Main.fibonacci 1 operation
-//push return address
-@call_counter_4
+// call Main.fibonacci 1
+@Main.fibonacci$ret.3
 D=A
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push LCL
+@SP
+M=M+1
 @LCL
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push ARG 
+@SP
+M=M+1
 @ARG
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push THIS 
+@SP
+M=M+1
 @THIS
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//push THAT 
+@SP
+M=M+1
 @THAT
 D=M
 @SP
-AM=M+1
-A=A-1
+A=M
 M=D
- 
-//ARG = SP - n - 5
 @SP
-D=M
-@6
-D=D-A
-@ARG
-M=D
- 
-//LCL = SP
+M=M+1
 @SP
 D=M
 @LCL
 M=D
+@5
+D=D-A
+@1
+D=D-A
+@ARG
+M=D
 @Main.fibonacci
 0;JMP
-(call_counter_4)
+(Main.fibonacci$ret.3)
  
 //add
 @SP
