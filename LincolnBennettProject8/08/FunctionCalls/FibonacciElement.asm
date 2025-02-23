@@ -3,8 +3,7 @@
 D=A
 @SP
 M=D
-
-//call sys.int
+ 
 @Sys.init$ret.0
 D=A
 @SP
@@ -53,8 +52,7 @@ M=D
 @Sys.init
 0;JMP
 (Sys.init$ret.0)
- 
-// function Sys.init 0 operation
+// function Sys.init 0
 (Sys.init)
 //push constant operation
 @4
@@ -65,55 +63,63 @@ M=D
 @SP
 M=M+1
 
-// call Main.fibonacci 1
-@Main.fibonacci$ret.1
+// call Main.fibonacci 1 operation
+//push return address
+@call_counter_2
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push LCL
 @LCL
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push ARG 
 @ARG
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push THIS 
 @THIS
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push THAT 
 @THAT
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
+ 
+//ARG = SP - n - 5
 @SP
-M=M+1
+D=M
+@6
+D=D-A
+@ARG
+M=D
+ 
+//LCL = SP
 @SP
 D=M
 @LCL
 M=D
-@5
-D=D-A
-@1
-D=D-A
-@ARG
-M=D
 @Main.fibonacci
 0;JMP
-(Main.fibonacci$ret.1)
+(call_counter_2)
  
 (WHILE)
 // goto WHILE operation
@@ -143,28 +149,23 @@ M=D
 @SP
 M=M+1
 
-// lt 
+//lt
 @SP
 AM=M-1
 D=M
 A=A-1
 D=M-D
-@c0_if_lt
+M=-1
+@continue0
 D;JLT
-D=0
-@c0_else
-0;JMP
-(c0_if_lt)
-D=-1
-(c0_else)
 @SP
 A=M-1
-M=D
+M=0
+(continue0)
 
 // if-goto IF_TRUE operation
 @SP
-M=M-1
-A=M
+AM=M-1
 D=M
 @IF_TRUE
 D;JNE
@@ -186,47 +187,57 @@ M=D //set value at top of stack to D
 @SP
 M=M+1 //increment stack pointer
 
-// return 
+// return operation
+//R13=LCL
 @LCL
 D=M
 @R13
 M=D
+//R14 = *(R13 - 5)
+@LCL
+D=M
 @5
 A=D-A
 D=M
 @R14
 M=D
+//*ARG = pop(), 
 @SP
-M=M-1
-A=M
+A=M-1
 D=M
 @ARG
 A=M
 M=D
+//SP =ARG+1 restore the SP of the caller
 @ARG
-D=M
+D=M+1
 @SP
-M=D+1
+M=D
+//THAT = *(R13-1), restore THAT of the caller
 @R13
 AM=M-1
 D=M
 @THAT
 M=D
+//THIS = *(R13-2), restore THIS of the caller
 @R13
 AM=M-1
 D=M
 @THIS
 M=D
+//ARG = *(R13-3), restore ARG of the caller
 @R13
 AM=M-1
 D=M
 @ARG
 M=D
+//LCL = *(R13-4), restore ARG of the caller
 @R13
 AM=M-1
 D=M
 @LCL
 M=D
+//goto *R14
 @R14
 A=M
 0;JMP
@@ -260,55 +271,63 @@ D=M
 A=A-1
 M=M-D
 
-// call Main.fibonacci 1
-@Main.fibonacci$ret.2
+// call Main.fibonacci 1 operation
+//push return address
+@call_counter_3
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push LCL
 @LCL
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push ARG 
 @ARG
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push THIS 
 @THIS
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push THAT 
 @THAT
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
+ 
+//ARG = SP - n - 5
 @SP
-M=M+1
+D=M
+@6
+D=D-A
+@ARG
+M=D
+ 
+//LCL = SP
 @SP
 D=M
 @LCL
 M=D
-@5
-D=D-A
-@1
-D=D-A
-@ARG
-M=D
 @Main.fibonacci
 0;JMP
-(Main.fibonacci$ret.2)
+(call_counter_3)
  
 //push ARG 0 operation
 @ARG
@@ -338,55 +357,63 @@ D=M
 A=A-1
 M=M-D
 
-// call Main.fibonacci 1
-@Main.fibonacci$ret.3
+// call Main.fibonacci 1 operation
+//push return address
+@call_counter_4
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push LCL
 @LCL
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push ARG 
 @ARG
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push THIS 
 @THIS
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
+ 
+//push THAT 
 @THAT
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
+ 
+//ARG = SP - n - 5
 @SP
-M=M+1
+D=M
+@6
+D=D-A
+@ARG
+M=D
+ 
+//LCL = SP
 @SP
 D=M
 @LCL
 M=D
-@5
-D=D-A
-@1
-D=D-A
-@ARG
-M=D
 @Main.fibonacci
 0;JMP
-(Main.fibonacci$ret.3)
+(call_counter_4)
  
 //add
 @SP
@@ -395,51 +422,58 @@ D=M
 A=A-1
 M=D+M
 
-// return 
+// return operation
+//R13=LCL
 @LCL
 D=M
 @R13
 M=D
+//R14 = *(R13 - 5)
+@LCL
+D=M
 @5
 A=D-A
 D=M
 @R14
 M=D
+//*ARG = pop(), 
 @SP
-M=M-1
-A=M
+A=M-1
 D=M
 @ARG
 A=M
 M=D
+//SP =ARG+1 restore the SP of the caller
 @ARG
-D=M
+D=M+1
 @SP
-M=D+1
+M=D
+//THAT = *(R13-1), restore THAT of the caller
 @R13
 AM=M-1
 D=M
 @THAT
 M=D
+//THIS = *(R13-2), restore THIS of the caller
 @R13
 AM=M-1
 D=M
 @THIS
 M=D
+//ARG = *(R13-3), restore ARG of the caller
 @R13
 AM=M-1
 D=M
 @ARG
 M=D
+//LCL = *(R13-4), restore ARG of the caller
 @R13
 AM=M-1
 D=M
 @LCL
 M=D
+//goto *R14
 @R14
 A=M
 0;JMP
  
-(EXIT)
-@EXIT
-0;JMP
