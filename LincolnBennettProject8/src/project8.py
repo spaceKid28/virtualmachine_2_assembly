@@ -1,15 +1,15 @@
 import os
-from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper, ifgoto, goto, func, ret, call, combine_multiple_vm_files
+from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper, ifgoto, goto, func, ret, call, get_vm_file_paths
 
 
 def main(filename):
-    delete_flag = False
+    # delete_flag = False
     if filename.endswith('.vm'):
         pass
     # if the file doesn't end with .vm we assume it is a folder
     # our function will combine all of the .vm files into one .vm file and return the address to this .vm file
     else:
-        filename = combine_multiple_vm_files(filename)
+        filename = get_vm_file_paths(filename)
         delete_flag = True
 
     lines = parser(filename)
@@ -18,7 +18,6 @@ def main(filename):
     # we start with setting the stack pointer to 
     new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", " "]
     lines = ["call Sys.init 0"] + lines
-    print(lines[:10])
     # create multiple continues that we can use later
     continues = [f"continue{x}" for x in range(10000)]
     call_counter = 1
@@ -77,10 +76,10 @@ def main(filename):
     # write file with correct extensions
     write_file(filename, new_lines, "asm")
     # if we combined a bunch of .vm files, we delete this file as good practice
-    if delete_flag:
-        #delete
-        # print(filename)
-        os.remove(filename)
+    # if delete_flag:
+    #     #delete
+    #     # print(filename)
+    #     os.remove(filename)
     return
 
 if __name__ == '__main__':
