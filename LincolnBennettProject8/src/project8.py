@@ -78,8 +78,8 @@ def main(filename):
     # if we combined a bunch of .vm files, we delete this file as good practice
     if delete_flag:
         #delete
-        print(filename)
-        # os.remove(filename)
+        # print(filename)
+        os.remove(filename)
     return
 
 if __name__ == '__main__':

@@ -13,11 +13,15 @@ def combine_multiple_vm_files(filepath):
                 tmp_filepath = os.path.join(filepath, file)
                 with open(tmp_filepath, 'r') as f:
                     combined_lines.extend(f.readlines())
-    
+    # if last / was included in input, remove it
+    if filepath[-1] == "/":
+        filepath = filepath[:-1]
+    # create new file
+    new_filepath = f"{filepath}/{filepath.split("/")[-1]}.vm"
     # write to new file
-    with open(filepath + ".vm", 'w') as f:
+    with open(new_filepath, 'w') as f:
         f.writelines(combined_lines)
-    return filepath + ".vm"
+    return new_filepath
 def parser(filename):
     lines = []
     # Convert relative path to absolute path
