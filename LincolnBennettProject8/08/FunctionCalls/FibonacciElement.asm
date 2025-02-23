@@ -175,7 +175,8 @@ M=0
 
 // if-goto IF_TRUE operation
 @SP
-AM=M-1
+M=M-1
+A=M
 D=M
 @IF_TRUE
 D;JNE
@@ -477,7 +478,7 @@ D=M
 @ARG
 M=D
 //LCL = *(R13-4), restore ARG of the caller
-@13
+@R13
 AM=M-1
 D=M
 @LCL
