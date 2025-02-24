@@ -3,6 +3,9 @@ from src.util import parser, write_file, constant, arithmetic_operations, stackv
 
 
 def main(path):
+    # create multiple continues that we can use later
+    continues = [f"continue{x}" for x in range(10000)]
+    call_counter = 1
     # delete_flag = False
     if path.endswith('.vm'):
         filenames = [path]
