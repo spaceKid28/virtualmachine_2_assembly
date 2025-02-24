@@ -283,7 +283,7 @@ M=M-D
 
 // call Main.fibonacci 1 operation
 //push return address
-@call_counter_1
+@call_counter_3
 D=A
 @SP
 AM=M+1
@@ -337,7 +337,7 @@ D=M
 M=D
 @Main.fibonacci
 0;JMP
-(call_counter_1)
+(call_counter_3)
  
 //push ARG 0 operation
 @ARG
@@ -369,7 +369,7 @@ M=M-D
 
 // call Main.fibonacci 1 operation
 //push return address
-@call_counter_2
+@call_counter_4
 D=A
 @SP
 AM=M+1
@@ -423,7 +423,7 @@ D=M
 M=D
 @Main.fibonacci
 0;JMP
-(call_counter_2)
+(call_counter_4)
  
 //add
 @SP
