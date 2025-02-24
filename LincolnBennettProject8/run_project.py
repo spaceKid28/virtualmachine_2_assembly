@@ -8,6 +8,4 @@ if __name__ == '__main__':
         sys.exit(1)
     filename = sys.argv[1]
     filename = os.path.abspath(filename)
-    main(filename, boot_strap_flag=False)
-# this is my terminal command: python run_project.py 07/StackArithmetic/SimpleAdd/SimpleAdd.vm
-# this is my terminal command: python run_project.py 07/StackArithmetic/StackTest/StackTest.vm
+    main(filename, boot_strap_flag=True)
