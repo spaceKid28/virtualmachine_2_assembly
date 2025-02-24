@@ -7,6 +7,12 @@ python run_project.py 08/FunctionCalls/StaticsTest
 
 This will produce a new file "08/FunctionCalls/StaticsTest/StaticsTest.asm"
 
+**NOTE TO GRADER** If you would like to run the program without adding bootstrapping code,
+simply change the argument in line 11 of run_project.py to False.
+For Example:
+    main(filename, boot_strap_flag=False)
+and then run from the command line: python run_project.py 08/ProgramFlow/FibonacciSeries/FibonacciSeries.vm
+
 This program takes one argument, the filepath to the input file, including the filename of the input file.
 
 The code for the program is found in src/project0.py

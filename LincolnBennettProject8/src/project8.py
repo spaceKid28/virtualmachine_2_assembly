@@ -2,7 +2,7 @@ import os
 from src.util import parser, write_file, constant, arithmetic_operations, stackvar, pointer, static_helper, ifgoto, goto, func, ret, call, get_vm_file_paths
 
 
-def main(path):
+def main(path, boot_strap_flag = True):
     # create multiple continues that we can use later
     continues = [f"continue{x}" for x in range(10000)]
     call_counter = 1
@@ -14,8 +14,9 @@ def main(path):
     else:
         filenames = get_vm_file_paths(path)
     
-    boot_strap_flag = True
-    new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", " "]
+    new_lines = []
+    if boot_strap_flag:
+        new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", " "]
     for filename in filenames:
         lines = parser(filename)
 
