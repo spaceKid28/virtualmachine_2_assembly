@@ -8,7 +8,6 @@ if __name__ == '__main__':
         sys.exit(1)
     filename = sys.argv[1]
     filename = os.path.abspath(filename)
-    print(filename)
     main(filename)
 # this is my terminal command: python run_project.py 07/StackArithmetic/SimpleAdd/SimpleAdd.vm
 # this is my terminal command: python run_project.py 07/StackArithmetic/StackTest/StackTest.vm

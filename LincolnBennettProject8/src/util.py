@@ -1,28 +1,5 @@
 import os
 
-# def combine_multiple_vm_files(filepath):
-#     ''' this function takes a filepath pointing to a folder, and returns a list of all the lines '''
-#     combined_lines = []
-    
-#     # Check if the input is a directory
-#     if os.path.isdir(filepath):
-#         # Process all .vm files in the directory
-#         for file in os.listdir(filepath):
-#             if file.endswith('.vm'):
-#                 # create temporary filepath to read using os
-#                 tmp_filepath = os.path.join(filepath, file)
-#                 with open(tmp_filepath, 'r') as f:
-#                     combined_lines.extend(f.readlines())
-#     # if last / was included in input, remove it
-#     if filepath[-1] == "/":
-#         filepath = filepath[:-1]
-#     # create new file
-#     new_filepath = f"{filepath}/{filepath.split("/")[-1]}.vm"
-#     # write to new file
-#     with open(new_filepath, 'w') as f:
-#         f.writelines(combined_lines)
-#     return new_filepath
-
 def get_vm_file_paths(directory):
     ''' This function takes a directory path and returns a list of paths to .vm files in that directory '''
     vm_file_paths = []
@@ -35,8 +12,8 @@ def get_vm_file_paths(directory):
                 # create temporary filepath to read using os
                 tmp_filepath = os.path.join(directory, file)
                 vm_file_paths.append(tmp_filepath)
-    
     return vm_file_paths
+
 def parser(filename):
     lines = []
     # Convert relative path to absolute path
@@ -213,11 +190,16 @@ def symbolless_assembler(input):
     return binary_instructions
 
 def write_file(filename, lines, extension):
-    # Convert relative path to absolute path and strip .in extension
-
+    if filename[-1] == '/':
+        filename = filename[:-1]
+    # if this is a directory we want to write inise it.
+    if os.path.isdir(filename):
+        last_part = filename.split('/')[-1]
+        filename = filename + '/' + last_part
     filename = os.path.splitext(filename)[0]
     filename = os.path.abspath(filename)
     
+    # if the filename is a folder, we want
     with open(f"{filename}.{extension}", "w") as outputfile:
         for line in lines:
             # add new line character at the end of each line
@@ -310,15 +292,6 @@ def ret(line):
                 "//LCL = *(R13-4), restore ARG of the caller", "@R13", "AM=M-1", "D=M", "@LCL", "M=D",
                 "//goto *R14", "@R14", "A=M", "0;JMP", " "
     ]
-    # new_lines = ["@LCL", "D=M", "@13", "M=D", "",  # Save the current LCL (frame pointer) in R13
-    #     "@5", "A=D-A", "D=M", "@14", "M=D", "",  # Save return address (LCL-5) in R14
-    #     "@SP", "AM=M-1", "D=M", "@ARG", "A=M", "M=D", "",  # Move return value to ARG[0] - note return value is current at *SP-1, top of current function stack 
-    #     "@ARG", "D=M+1", "@SP", "M=D", ""  # Reposition SP to ARG+1
-    #     "@13", "AM=M-1", "D=M", "@THAT", "M=D", "",  # Restore THAT of the caller
-    #     "@13", "AM=M-1", "D=M", "@THIS", "M=D", "",  # Restore THIS of the caller
-    #     "@13", "AM=M-1", "D=M", "@ARG", "M=D", "",  # Restore ARG of the caller
-    #     "@13", "AM=M-1", "D=M", "@LCL", "M=D", "",  # Restore LCL of the caller
-    #     "@14", "A=M", "0;JMP", ""]  # Jump to the return address saved in R14
     return new_lines
 
 def call(line, label):

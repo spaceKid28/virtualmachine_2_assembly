@@ -13,7 +13,6 @@ def main(path):
     # our function will combine all of the .vm files into one .vm file and return the address to this .vm file
     else:
         filenames = get_vm_file_paths(path)
-        # delete_flag = True
     
     boot_strap_flag = True
     new_lines = ["//bootstrap code ", "@256", "D=A", "@SP", "M=D", " "]
@@ -21,13 +20,11 @@ def main(path):
         lines = parser(filename)
 
         # new lines is list of lines that we will pass to write_file
-        # we start with setting the stack pointer to 
+        # FOR THE FIRST FILE ONLY, we had the VM instruction to call Sys.init 0
+        # The if statement with the Flag does this
         if boot_strap_flag:
             lines = ["call Sys.init 0"] + lines
             boot_strap_flag = False
-        # # create multiple continues that we can use later
-        # continues = [f"continue{x}" for x in range(10000)]
-        # call_counter = 1
 
         operators = ["local", "argument", "this", "that", "temp"]
         for line in lines:
@@ -78,15 +75,8 @@ def main(path):
             else:
                 new_lines = new_lines + [line]
 
-        # add exit loop
+    # add exit loop at the end
     new_lines = new_lines + ["(EXIT)", "@EXIT", "0;JMP"]
-        # write file with correct extensions
-        # write_file(filename, new_lines, "asm")
-        # if we combined a bunch of .vm files, we delete this file as good practice
-        # if delete_flag:
-        #     #delete
-        #     # print(filename)
-        #     os.remove(filename)
     write_file(path, new_lines, "asm")
     return
 

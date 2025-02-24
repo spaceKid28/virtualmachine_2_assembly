@@ -3,10 +3,67 @@
 D=A
 @SP
 M=D
+ 
+// call Sys.init 0 operation
+//push return address
+@call_counter_1
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push LCL
+@LCL
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push ARG 
+@ARG
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push THIS 
+@THIS
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//push THAT 
+@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+ 
+//ARG = SP - n - 5
+@SP
+D=M
+@5
+D=D-A
+@ARG
+M=D
+ 
+//LCL = SP
+@SP
+D=M
+@LCL
+M=D
 @Sys.init
 0;JMP
+(call_counter_1)
  
 // function SimpleFunction.test 2 operation
+(SimpleFunction.test)
 @SP
 AM=M+1 //increment stack pointer and address in A
 A=A-1 //Note, we have already incremented SP, we adjust to set to 0
@@ -136,7 +193,7 @@ D=M
 @ARG
 M=D
 //LCL = *(R13-4), restore ARG of the caller
-@13
+@R13
 AM=M-1
 D=M
 @LCL
@@ -146,3 +203,6 @@ M=D
 A=M
 0;JMP
  
+(EXIT)
+@EXIT
+0;JMP

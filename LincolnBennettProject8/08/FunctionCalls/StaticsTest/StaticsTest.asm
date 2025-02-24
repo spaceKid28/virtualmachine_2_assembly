@@ -383,7 +383,7 @@ M=M+1 //increment stack pointer
 @SP
 AM=M-1
 D=M
-@StaticsTest.0
+@Class2.0
 M=D
 
 //push ARG 1 operation
@@ -402,7 +402,7 @@ M=M+1 //increment stack pointer
 @SP
 AM=M-1
 D=M
-@StaticsTest.1
+@Class2.1
 M=D
 
 //push constant operation
@@ -472,7 +472,7 @@ A=M
 // function Class2.get 0 operation
 (Class2.get)
 //push static 0 operation
-@StaticsTest.0
+@Class2.0
 D=M
 @SP
 A=M
@@ -481,7 +481,7 @@ M=D
 M=M+1 //increment stack pointer
 
 //push static 1 operation
-@StaticsTest.1
+@Class2.1
 D=M
 @SP
 A=M
@@ -569,7 +569,7 @@ M=M+1 //increment stack pointer
 @SP
 AM=M-1
 D=M
-@StaticsTest.0
+@Class1.0
 M=D
 
 //push ARG 1 operation
@@ -588,7 +588,7 @@ M=M+1 //increment stack pointer
 @SP
 AM=M-1
 D=M
-@StaticsTest.1
+@Class1.1
 M=D
 
 //push constant operation
@@ -658,7 +658,7 @@ A=M
 // function Class1.get 0 operation
 (Class1.get)
 //push static 0 operation
-@StaticsTest.0
+@Class1.0
 D=M
 @SP
 A=M
@@ -667,7 +667,7 @@ M=D
 M=M+1 //increment stack pointer
 
 //push static 1 operation
-@StaticsTest.1
+@Class1.1
 D=M
 @SP
 A=M
