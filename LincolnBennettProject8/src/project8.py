@@ -25,9 +25,9 @@ def main(path):
         if boot_strap_flag:
             lines = ["call Sys.init 0"] + lines
             boot_strap_flag = False
-        # create multiple continues that we can use later
-        continues = [f"continue{x}" for x in range(10000)]
-        call_counter = 1
+        # # create multiple continues that we can use later
+        # continues = [f"continue{x}" for x in range(10000)]
+        # call_counter = 1
 
         operators = ["local", "argument", "this", "that", "temp"]
         for line in lines:
