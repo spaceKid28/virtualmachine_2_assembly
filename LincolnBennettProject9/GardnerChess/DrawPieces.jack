@@ -1,0 +1,14 @@
+class DrawPieces {
+    function void drawpieces(){
+        var int memAddress;
+        var int row, col;
+        // row can be between 0-4
+        let row = 3;
+        // col can be between 0-4
+        let col = 0;
+
+        let memAddress = row * 1024 + 2 * col;
+        do GamePieces.draw_black_rook(memAddress);
+        return;
+    }
+}

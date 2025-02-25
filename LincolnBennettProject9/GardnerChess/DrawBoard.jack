@@ -1,0 +1,38 @@
+class DrawBoard {
+    //Here we are drawing a 5X5 chessboard of alternating color (black v white tiles, so it looks like a traditional chess board)
+    
+    // set the size of each tile in the chessboard
+    function void draw_tile(int x, int y, int color, int tile_size) {
+        do Screen.setColor(color);
+        do Screen.drawRectangle(x, y, x + tile_size, y + tile_size);
+        return;
+    }
+
+    function void draw_board(int tile_size) {
+        // draw black tiles (We actually don't even need to draw white tiles)
+        // Row 1
+        do DrawBoard.draw_tile(0, 0, 1, tile_size);
+        do DrawBoard.draw_tile(0 + (2 * tile_size), 0, 1, tile_size);
+        do DrawBoard.draw_tile(0 + (4 * tile_size), 0, 1, tile_size);
+
+        // Row 2
+        do DrawBoard.draw_tile(0 + (1 * tile_size), tile_size, 1, tile_size);
+        do DrawBoard.draw_tile(0 + (3 * tile_size), tile_size, 1, tile_size);
+        
+        // Row 3
+        do DrawBoard.draw_tile(0, 2 * tile_size, 1, tile_size);
+        do DrawBoard.draw_tile(0 + (2 * tile_size), 2 * tile_size, 1, tile_size);
+        do DrawBoard.draw_tile(0 + (4 * tile_size), 2 * tile_size, 1, tile_size);
+
+        // Row 4
+        do DrawBoard.draw_tile(0 + (1 * tile_size), 3 * tile_size, 1, tile_size);
+        do DrawBoard.draw_tile(0 + (3 * tile_size), 3 * tile_size, 1, tile_size);
+
+        // Row 5
+        do DrawBoard.draw_tile(0, 4 * tile_size, 1, tile_size);
+        do DrawBoard.draw_tile(0 + (2 * tile_size), 4 * tile_size, 1, tile_size);
+        do DrawBoard.draw_tile(0 + (4 * tile_size), 4 * tile_size, 1, tile_size);
+
+        return; 
+    }
+}

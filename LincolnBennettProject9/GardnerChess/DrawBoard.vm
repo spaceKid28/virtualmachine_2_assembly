@@ -1,0 +1,153 @@
+function DrawBoard.draw_tile 0
+    push argument 2
+    call Screen.setColor 1
+    pop temp 0
+    push argument 0
+    push argument 1
+    push argument 0
+    push argument 3
+    add
+    push argument 1
+    push argument 3
+    add
+    call Screen.drawRectangle 4
+    pop temp 0
+    push constant 0
+    return
+function DrawBoard.draw_board 0
+    push constant 0
+    push constant 0
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 2
+    push argument 0
+    call Math.multiply 2
+    add
+    push constant 0
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 4
+    push argument 0
+    call Math.multiply 2
+    add
+    push constant 0
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 1
+    push argument 0
+    call Math.multiply 2
+    add
+    push argument 0
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 3
+    push argument 0
+    call Math.multiply 2
+    add
+    push argument 0
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 2
+    push argument 0
+    call Math.multiply 2
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 2
+    push argument 0
+    call Math.multiply 2
+    add
+    push constant 2
+    push argument 0
+    call Math.multiply 2
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 4
+    push argument 0
+    call Math.multiply 2
+    add
+    push constant 2
+    push argument 0
+    call Math.multiply 2
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 1
+    push argument 0
+    call Math.multiply 2
+    add
+    push constant 3
+    push argument 0
+    call Math.multiply 2
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 3
+    push argument 0
+    call Math.multiply 2
+    add
+    push constant 3
+    push argument 0
+    call Math.multiply 2
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 4
+    push argument 0
+    call Math.multiply 2
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 2
+    push argument 0
+    call Math.multiply 2
+    add
+    push constant 4
+    push argument 0
+    call Math.multiply 2
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    push constant 4
+    push argument 0
+    call Math.multiply 2
+    add
+    push constant 4
+    push argument 0
+    call Math.multiply 2
+    push constant 1
+    push argument 0
+    call DrawBoard.draw_tile 4
+    pop temp 0
+    push constant 0
+    return
