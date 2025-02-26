@@ -1,8 +1,34 @@
 class DrawPieces {
+    // This class is mostly just to draw the initial board, with all squares and pieces in appropriate place
     function void drawpieces(){
         
-        // Draw Pawns
+        // First we draw the board
+        var int i;
+        var int row;
+        var int col;
 
+        // Draw Board
+        let i = 0;
+        let row = 0;
+        let col = 0;
+
+        while (row < 5){
+            while (col < 5){
+                if (i = 1){ 
+                    let i = 0;
+                }
+                else{
+                    let i = 1;
+                }
+                // Note that 3rd argument is color, and 4th argument is the size
+                do GamePieces.draw_tile(row, col, i);
+                let col = col + 1;
+            }
+            let col = 0;
+            let row = row + 1;
+        }
+
+        // Draw Pawns
         do GamePieces.draw_white_pawn(3,0);
         do GamePieces.draw_white_pawn(3,1);
         do GamePieces.draw_white_pawn(3,2);
@@ -35,7 +61,6 @@ class DrawPieces {
         do GamePieces.draw_white_king(4,4);
         do GamePieces.draw_black_king(0,4);
 
-        do DrawBoard.draw_white_tile(2, 2, 0, 32);
         return;
     }
 }

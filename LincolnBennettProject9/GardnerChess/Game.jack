@@ -1,0 +1,72 @@
+class Game{
+    // This class contains the game, including writing to the screen and an infinite loop
+    function void game(){
+        var char gamepiece;
+        var String input;
+        var int white_turn, i;
+
+        // we use i for an infinite loop
+        let i = 1;
+        let white_turn = 1;
+
+        // this will reset the board
+        do DrawPieces.drawpieces();
+
+        // Print String to Screen
+        do Output.moveCursor(2, 30);
+        do Output.printString("Gardner Chess! (5x5)");
+        do Output.moveCursor(5, 25);
+        do Output.printString("Board is Zero Indexed:");
+        do Output.moveCursor(6, 25);
+        do Output.printString("Top Left is 0,0 Bottom Right is 4,4");
+        do Output.moveCursor(7, 25);
+        do Output.printString("Input Must be Formatted");
+        do Output.moveCursor(8, 25);
+        do Output.printString("Example: P11-12");
+        do Output.moveCursor(9, 25);
+        do Output.printString("This moves the Pawn from 1,1 to 1,2");
+
+
+        
+        do Output.moveCursor(16, 32);
+        do Output.printString("P=Pawn;  H=Horse;");
+        do Output.moveCursor(17, 32);
+        do Output.printString("B=Bishop; R=Rook;");
+        do Output.moveCursor(18, 32);
+        do Output.printString("Q=Queen; K=King;");
+        do Output.moveCursor(22, 25);
+        do Output.printString("ENTER 'A' TO RESET GAME");
+        
+        // this is the loop that runs the game
+        while (i = 1){
+ 
+            // Updates screen to tell User who's turn it is
+            if (white_turn = 1){
+                do Output.moveCursor(12, 30);
+                do Output.printString("            ");
+                do Output.printString("TURN: WHITE");
+            }
+            else{
+                do Output.moveCursor(12, 30);
+                do Output.printString("            ");
+                do Output.printString("TURN: BLACK");
+            }
+            do Output.moveCursor(14, 34);
+            let input = Keyboard.readLine("Enter Move:");
+            let gamepiece = input.charAt(0);
+            
+            // if User inputs A, restart the game (reset the board)
+            if (gamepiece = 65) {
+                do Game.game();
+            }
+
+            // move the appropriate piece
+            do MovePiece.movepiece(input, gamepiece, white_turn);
+
+            // change turns
+            let white_turn = white_turn * -1;
+        }
+        return;
+
+    }
+}

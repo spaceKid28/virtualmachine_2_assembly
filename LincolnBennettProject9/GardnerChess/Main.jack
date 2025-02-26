@@ -1,14 +1,6 @@
 class Main {
     function void main() {
-        
-        var int tile_size; 
-        let tile_size = 32;
-        
-        // do GamePieces.draw_white_pawn(1);
-        // do GamePieces.draw_black_rook(300);
-
-        do DrawBoard.draw_board(tile_size);
-        do DrawPieces.drawpieces();
+        do Game.game();
         return;
     }
 }

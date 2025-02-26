@@ -1,0 +1,91 @@
+class MovePiece{
+    // Given a user input, this class moves a piece on the board
+    function void movepiece(String input, char piece, int white_turn){
+        var int oldx, oldy, newx, newy, square_color;
+        
+        // convert user character (0,0) to integer 0,0
+        let oldx = input.charAt(1) - 48;
+        let oldy = input.charAt(2) - 48;
+
+        let newx = input.charAt(4) - 48;
+        let newy = input.charAt(5) - 48;
+
+        // do some modular arithemetic determine if 
+        // we are working with a black or white square
+        let square_color = MovePiece.mod(oldx + oldy, 2);
+        if (square_color = 1){
+            let square_color = 0;
+        }
+        else{
+            let square_color = 1;
+        }
+
+        if (white_turn = 1){
+            // White Pawn Move
+            if (piece = 80){
+                do GamePieces.draw_white_pawn(newx, newy);
+                do GamePieces.draw_tile(oldx, oldy, square_color);
+            }
+            // White Rook Move
+            if (piece = 82){
+                do GamePieces.draw_white_rook(newx, newy);
+            }
+            // White Horse Move (H)
+            if (piece = 72){
+                do GamePieces.draw_white_horse(newx, newy);
+            }
+            // White Bishop Move
+            if (piece = 66){
+                do GamePieces.draw_white_bishop(newx, newy);
+            }
+            // White Queen Move
+            if (piece = 81){
+                do GamePieces.draw_white_queen(newx, newy);
+            }
+            // White King Move
+            if (piece = 75){
+                do GamePieces.draw_white_king(newx, newy);
+            }
+            
+        }
+        else{
+        // Black Pawn Move
+        if (piece = 80){
+            do GamePieces.draw_black_pawn(newx, newy);
+            do GamePieces.draw_tile(oldx, oldy, square_color);
+        }
+        // Black Rook Move
+        if (piece = 82){
+            do GamePieces.draw_black_rook(newx, newy);
+        }
+        // Black Horse Move (H)
+        if (piece = 72){
+            do GamePieces.draw_black_horse(newx, newy);
+        }
+        // Black Bishop Move
+        if (piece = 66){
+            do GamePieces.draw_black_bishop(newx, newy);
+        }
+        // Black Queen Move
+        if (piece = 81){
+            do GamePieces.draw_black_queen(newx, newy);
+        }
+        // Black King Move
+        if (piece = 75){
+            do GamePieces.draw_black_king(newx, newy);
+            }
+        }
+
+        // re-color old tile (we do this to remove old image)
+        do GamePieces.draw_tile(oldx, oldy, square_color);
+        return;
+    }
+    // helper function to do arithmetic
+    function int mod (int x, int divisor){
+        var int floor_div;
+        var int solution;
+        let floor_div = x / divisor;
+        let solution = x - (floor_div * divisor);
+        return solution;
+    }
+}

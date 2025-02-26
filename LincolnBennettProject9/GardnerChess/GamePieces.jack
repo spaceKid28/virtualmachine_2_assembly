@@ -1,7 +1,5 @@
 class GamePieces {
-    // This function draws a white pawn, given row, col on chess board
-    // Note that the chessboard is 5x5 and zero indexed (top and bottom corners)
-    // are 0,0 4,4 respectively
+    // This class gives us the graphics of all our pieces and the draw tile function (to draw a square on our board)
 
     function void draw_white_pawn(int row, int col) {
 		var int location;
@@ -281,6 +279,17 @@ class GamePieces {
         do Memory.poke(memAddress + 416, -8177);
         do Memory.poke(memAddress + 448, -14337);
         do Memory.poke(memAddress + 480, -12289);
+        return;
+    }
+    
+    function void draw_tile(int y, int x, int color) {
+        var int tile_size;
+        let tile_size = 32;
+
+        let x = x * tile_size;
+        let y = y * tile_size;
+        do Screen.setColor(color);
+        do Screen.drawRectangle(x, y, x + tile_size, y + tile_size);
         return;
     }
 }
