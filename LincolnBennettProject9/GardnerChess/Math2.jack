@@ -1,0 +1,9 @@
+class Math2{
+    function int mod (int x, int divisor){
+        var int floor_div;
+        var int solution;
+        let floor_div = x / divisor;
+        let solution = x - floor_div * divisor;
+        return solution;
+    }
+}

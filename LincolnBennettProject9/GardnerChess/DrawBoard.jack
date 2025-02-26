@@ -7,6 +7,13 @@ class DrawBoard {
         do Screen.drawRectangle(x, y, x + tile_size, y + tile_size);
         return;
     }
+    function void draw_white_tile(int x, int y, int color, int tile_size) {
+        let x = x * tile_size;
+        let y = y * tile_size;
+        do Screen.setColor(color);
+        do Screen.drawRectangle(x, y, x + tile_size, y + tile_size);
+        return;
+    }
 
     function void draw_board(int tile_size) {
         // draw black tiles (We actually don't even need to draw white tiles)

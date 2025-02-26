@@ -1,14 +1,41 @@
 class DrawPieces {
     function void drawpieces(){
-        var int memAddress;
-        var int row, col;
-        // row can be between 0-4
-        let row = 3;
-        // col can be between 0-4
-        let col = 0;
+        
+        // Draw Pawns
 
-        let memAddress = row * 1024 + 2 * col;
-        do GamePieces.draw_black_rook(memAddress);
+        do GamePieces.draw_white_pawn(3,0);
+        do GamePieces.draw_white_pawn(3,1);
+        do GamePieces.draw_white_pawn(3,2);
+        do GamePieces.draw_white_pawn(3,3);
+        do GamePieces.draw_white_pawn(3,4);
+        
+        do GamePieces.draw_black_pawn(1,0);
+        do GamePieces.draw_black_pawn(1,1);
+        do GamePieces.draw_black_pawn(1,2);
+        do GamePieces.draw_black_pawn(1,3);
+        do GamePieces.draw_black_pawn(1,4);
+
+        // Draw Rooks
+        do GamePieces.draw_white_rook(4,0);
+        do GamePieces.draw_black_rook(0,0);
+
+        // Draw Knights
+        do GamePieces.draw_white_horse(4,1);
+        do GamePieces.draw_black_horse(0,1);
+
+        // Draw Bishops
+        do GamePieces.draw_white_bishop(4,2);
+        do GamePieces.draw_black_bishop(0,2);
+
+        // Draw Queens
+        do GamePieces.draw_white_queen(4,3);
+        do GamePieces.draw_black_queen(0,3);
+
+        // Draw Kings
+        do GamePieces.draw_white_king(4,4);
+        do GamePieces.draw_black_king(0,4);
+
+        do DrawBoard.draw_white_tile(2, 2, 0, 32);
         return;
     }
 }

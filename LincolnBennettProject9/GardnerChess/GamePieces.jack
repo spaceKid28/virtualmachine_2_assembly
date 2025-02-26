@@ -1,45 +1,12 @@
 class GamePieces {
-    // This function draws a white pawn, given an integer location
-    // the given integer location is the top left pixel of the drawn image
+    // This function draws a white pawn, given row, col on chess board
+    // Note that the chessboard is 5x5 and zero indexed (top and bottom corners)
+    // are 0,0 4,4 respectively
 
-    // function void drawtest_white_pawn(int x, int y, int tile_size) {
-    //     var int memAddress;
-    //     // Calculate the starting memory address based on x and y
-        
-    //     var int i;
-    //     var int j;
-    //     let memAddress = 16384 + (y * 512) + x; 
-    //     let i = 0;
-    //     while (i < tile_size) {
-    //         let j = 0;
-    //         while (j < tile_size) {
-    //             // Adjust the memory poke to use tile_size
-    //             do Memory.poke(memAddress + (i * 32) + j, -1); 
-    //             let j = j + 1;
-    //         }
-    //         let i = i + 1;
-    //     }
-    //     return;
-    // }
-    // function void drawtest_white_pawn(int x, int y, int tile_size) {
-    //     var int memAddress;
-    //     let memAddress = 16384 + (y * 512) + x; // Calculate the starting memory address based on x and y
-    //     var int i;
-    //     var int j;
-    //     let i = 0;
-    //     while (i < tile_size) {
-    //         let j = 0;
-    //         while (j < tile_size) {
-    //             do Memory.poke(memAddress + (i * 32) + j, -1); // Adjust the memory poke to use tile_size
-    //             let j = j + 1;
-    //         }
-    //         let i = i + 1;
-    //     }
-    //     return;
-
-    // }
-    function void draw_white_pawn(int location) {
-		var int memAddress;
+    function void draw_white_pawn(int row, int col) {
+		var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
 		let memAddress = 16384 + location;
 		do Memory.poke(memAddress + 0, -1);
 		do Memory.poke(memAddress + 32, -2017);
@@ -59,8 +26,11 @@ class GamePieces {
 		do Memory.poke(memAddress + 480, -8185);
 		return;
     }
-    function void draw_black_pawn(int location) {
-		var int memAddress;
+    
+    function void draw_black_pawn(int row, int col) {
+		var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
 		let memAddress = 16384 + location;
 		do Memory.poke(memAddress + 0, 0);
 		do Memory.poke(memAddress + 32, 2016);
@@ -80,8 +50,10 @@ class GamePieces {
 		do Memory.poke(memAddress + 480, 8184);
 		return;
     }
-    function void draw_black_rook(int location) {
+    function void draw_black_rook(int row, int col) {
+        var int location;
         var int memAddress;
+        let location = (row * 1024) + (col * 2);
         let memAddress = 16384 + location;
         do Memory.poke(memAddress + 0, 0);
         do Memory.poke(memAddress + 32, 6552);
@@ -102,8 +74,10 @@ class GamePieces {
         return;
         }
     
-    function void draw_white_rook(int location){
+    function void draw_white_rook(int row, int col){
+        var int location;
         var int memAddress;
+        let location = (row * 1024) + (col * 2);
         let memAddress = 16384 + location;
         do Memory.poke(memAddress + 0, -1);
         do Memory.poke(memAddress + 32, -6553);
@@ -122,6 +96,191 @@ class GamePieces {
         do Memory.poke(memAddress + 448, -8185);
         do Memory.poke(memAddress + 480, -8185);
         return;
+    }
+    
+    function void draw_black_horse(int row, int col){
+        var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
+		let memAddress = 16384 + location;
+		do Memory.poke(memAddress + 0, 0);
+		do Memory.poke(memAddress + 32, 1536);
+		do Memory.poke(memAddress + 64, 8128);
+		do Memory.poke(memAddress + 96, 5984);
+		do Memory.poke(memAddress + 128, 6128);
+		do Memory.poke(memAddress + 160, 6136);
+		do Memory.poke(memAddress + 192, 6136);
+		do Memory.poke(memAddress + 224, 6016);
+		do Memory.poke(memAddress + 256, 6016);
+		do Memory.poke(memAddress + 288, 6016);
+		do Memory.poke(memAddress + 320, 8128);
+		do Memory.poke(memAddress + 352, 2016);
+		do Memory.poke(memAddress + 384, 2016);
+		do Memory.poke(memAddress + 416, 8184);
+		do Memory.poke(memAddress + 448, 16380);
+		do Memory.poke(memAddress + 480, 32766);
+		return;
+	}
+    function void draw_white_horse(int row, int col) {
+		var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
+		let memAddress = 16384 + location;
+		do Memory.poke(memAddress + 0, -1);
+		do Memory.poke(memAddress + 32, -1537);
+		do Memory.poke(memAddress + 64, -8129);
+		do Memory.poke(memAddress + 96, -5985);
+		do Memory.poke(memAddress + 128, -6129);
+		do Memory.poke(memAddress + 160, -6137);
+		do Memory.poke(memAddress + 192, -6137);
+		do Memory.poke(memAddress + 224, -6017);
+		do Memory.poke(memAddress + 256, -6017);
+		do Memory.poke(memAddress + 288, -6017);
+		do Memory.poke(memAddress + 320, -8129);
+		do Memory.poke(memAddress + 352, -2017);
+		do Memory.poke(memAddress + 384, -2017);
+		do Memory.poke(memAddress + 416, -8185);
+		do Memory.poke(memAddress + 448, -16381);
+		do Memory.poke(memAddress + 480, -32767);
+		return;
+	}
+    function void draw_white_bishop(int row, int col) {
+		var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
+		let memAddress = 16384 + location;
+		do Memory.poke(memAddress + 0, 960);
+		do Memory.poke(memAddress + 32, 576);
+		do Memory.poke(memAddress + 64, 576);
+		do Memory.poke(memAddress + 96, 960);
+		do Memory.poke(memAddress + 128, 2016);
+		do Memory.poke(memAddress + 160, 3120);
+		do Memory.poke(memAddress + 192, 3120);
+		do Memory.poke(memAddress + 224, 1056);
+		do Memory.poke(memAddress + 256, 2016);
+		do Memory.poke(memAddress + 288, 576);
+		do Memory.poke(memAddress + 320, 576);
+		do Memory.poke(memAddress + 352, 576);
+		do Memory.poke(memAddress + 384, 1056);
+		do Memory.poke(memAddress + 416, 2064);
+		do Memory.poke(memAddress + 448, 2064);
+		do Memory.poke(memAddress + 480, 2016);
+		return;
+	}
+    function void draw_black_bishop(int row, int col) {
+		var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
+		let memAddress = 16384 + location;
+		do Memory.poke(memAddress + 0, -961);
+        do Memory.poke(memAddress + 32, -577);
+        do Memory.poke(memAddress + 64, -577);
+        do Memory.poke(memAddress + 96, -961);
+        do Memory.poke(memAddress + 128, -2017);
+        do Memory.poke(memAddress + 160, -3121);
+        do Memory.poke(memAddress + 192, -3121);
+        do Memory.poke(memAddress + 224, -1057);
+        do Memory.poke(memAddress + 256, -2017);
+        do Memory.poke(memAddress + 288, -577);
+        do Memory.poke(memAddress + 320, -577);
+        do Memory.poke(memAddress + 352, -577);
+        do Memory.poke(memAddress + 384, -1057);
+        do Memory.poke(memAddress + 416, -2065);
+        do Memory.poke(memAddress + 448, -2065);
+        do Memory.poke(memAddress + 480, -2017);
+		return;
+	}
+    function void draw_white_king(int row, int col){
+        var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
+		let memAddress = 16384 + location;
+        	do Memory.poke(memAddress + 0, 384);
+            do Memory.poke(memAddress + 32, 384);
+            do Memory.poke(memAddress + 64, 2016);
+            do Memory.poke(memAddress + 96, 2016);
+            do Memory.poke(memAddress + 128, 384);
+            do Memory.poke(memAddress + 160, 384);
+            do Memory.poke(memAddress + 192, 25158);
+            do Memory.poke(memAddress + 224, -27607);
+            do Memory.poke(memAddress + 256, -30703);
+            do Memory.poke(memAddress + 288, -32767);
+            do Memory.poke(memAddress + 320, -32767);
+            do Memory.poke(memAddress + 352, 16386);
+            do Memory.poke(memAddress + 384, 8196);
+            do Memory.poke(memAddress + 416, 8184);
+            do Memory.poke(memAddress + 448, 4104);
+            do Memory.poke(memAddress + 480, 8184);
+        return;
+    }
 
+    function void draw_black_king(int row, int col){
+        var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
+		let memAddress = 16384 + location;
+        do Memory.poke(memAddress + 0, -385);
+        do Memory.poke(memAddress + 32, -385);
+        do Memory.poke(memAddress + 64, -2017);
+        do Memory.poke(memAddress + 96, -2017);
+        do Memory.poke(memAddress + 128, -385);
+        do Memory.poke(memAddress + 160, -385);
+        do Memory.poke(memAddress + 192, -25159);
+        do Memory.poke(memAddress + 224, 27606);
+        do Memory.poke(memAddress + 256, 30702);
+        do Memory.poke(memAddress + 288, 32766);
+        do Memory.poke(memAddress + 320, 32766);
+        do Memory.poke(memAddress + 352, -16387);
+        do Memory.poke(memAddress + 384, -8197);
+        do Memory.poke(memAddress + 416, -8185);
+        do Memory.poke(memAddress + 448, -4105);
+        do Memory.poke(memAddress + 480, -8185);
+        return;
+    }
+    function void draw_white_queen(int row, int col){
+        var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
+        let memAddress = 16384 + location;
+        do Memory.poke(memAddress + 0, 0);
+        do Memory.poke(memAddress + 32, 0);
+        do Memory.poke(memAddress + 64, 2016);
+        do Memory.poke(memAddress + 96, 4080);
+        do Memory.poke(memAddress + 128, 7192);
+        do Memory.poke(memAddress + 160, 14348);
+        do Memory.poke(memAddress + 192, 12300);
+        do Memory.poke(memAddress + 224, 12300);
+        do Memory.poke(memAddress + 256, 12300);
+        do Memory.poke(memAddress + 288, 12684);
+        do Memory.poke(memAddress + 320, 13196);
+        do Memory.poke(memAddress + 352, 14108);
+        do Memory.poke(memAddress + 384, 7992);
+        do Memory.poke(memAddress + 416, 8176);
+        do Memory.poke(memAddress + 448, 14336);
+        do Memory.poke(memAddress + 480, 12288);
+        return;
+    }
+        function void draw_black_queen(int row, int col){
+        var int location;
+        var int memAddress;
+        let location = (row * 1024) + (col * 2);
+        let memAddress = 16384 + location;
+        do Memory.poke(memAddress + 0, -1);
+        do Memory.poke(memAddress + 32, -1);
+        do Memory.poke(memAddress + 64, -2017);
+        do Memory.poke(memAddress + 96, -4081);
+        do Memory.poke(memAddress + 128, -7193);
+        do Memory.poke(memAddress + 160, -14349);
+        do Memory.poke(memAddress + 192, -12301);
+        do Memory.poke(memAddress + 224, -12301);
+        do Memory.poke(memAddress + 256, -12301);
+        do Memory.poke(memAddress + 288, -12685);
+        do Memory.poke(memAddress + 320, -13197);
+        do Memory.poke(memAddress + 352, -14109);
+        do Memory.poke(memAddress + 384, -7993);
+        do Memory.poke(memAddress + 416, -8177);
+        do Memory.poke(memAddress + 448, -14337);
+        do Memory.poke(memAddress + 480, -12289);
+        return;
     }
 }
