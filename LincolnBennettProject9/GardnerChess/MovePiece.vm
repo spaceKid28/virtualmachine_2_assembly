@@ -1,0 +1,225 @@
+function MovePiece.movepiece 5
+    push argument 0
+    push constant 1
+    call String.charAt 2
+    push constant 48
+    sub
+    pop local 0
+    push argument 0
+    push constant 2
+    call String.charAt 2
+    push constant 48
+    sub
+    pop local 1
+    push argument 0
+    push constant 4
+    call String.charAt 2
+    push constant 48
+    sub
+    pop local 2
+    push argument 0
+    push constant 5
+    call String.charAt 2
+    push constant 48
+    sub
+    pop local 3
+    push local 0
+    push local 1
+    add
+    push constant 2
+    call MovePiece.mod 2
+    pop local 4
+    push local 4
+    push constant 1
+    eq
+    not
+    if-goto MovePiece_1
+    push constant 0
+    pop local 4
+    goto MovePiece_0
+label MovePiece_1
+    push constant 1
+    pop local 4
+label MovePiece_0
+    push argument 2
+    push constant 1
+    eq
+    not
+    if-goto MovePiece_3
+    push argument 1
+    push constant 80
+    eq
+    not
+    if-goto MovePiece_5
+    push local 2
+    push local 3
+    call GamePieces.draw_white_pawn 2
+    pop temp 0
+    push local 0
+    push local 1
+    push local 4
+    call GamePieces.draw_tile 3
+    pop temp 0
+    goto MovePiece_4
+label MovePiece_5
+label MovePiece_4
+    push argument 1
+    push constant 82
+    eq
+    not
+    if-goto MovePiece_7
+    push local 2
+    push local 3
+    call GamePieces.draw_white_rook 2
+    pop temp 0
+    goto MovePiece_6
+label MovePiece_7
+label MovePiece_6
+    push argument 1
+    push constant 72
+    eq
+    not
+    if-goto MovePiece_9
+    push local 2
+    push local 3
+    call GamePieces.draw_white_horse 2
+    pop temp 0
+    goto MovePiece_8
+label MovePiece_9
+label MovePiece_8
+    push argument 1
+    push constant 66
+    eq
+    not
+    if-goto MovePiece_11
+    push local 2
+    push local 3
+    call GamePieces.draw_white_bishop 2
+    pop temp 0
+    goto MovePiece_10
+label MovePiece_11
+label MovePiece_10
+    push argument 1
+    push constant 81
+    eq
+    not
+    if-goto MovePiece_13
+    push local 2
+    push local 3
+    call GamePieces.draw_white_queen 2
+    pop temp 0
+    goto MovePiece_12
+label MovePiece_13
+label MovePiece_12
+    push argument 1
+    push constant 75
+    eq
+    not
+    if-goto MovePiece_15
+    push local 2
+    push local 3
+    call GamePieces.draw_white_king 2
+    pop temp 0
+    goto MovePiece_14
+label MovePiece_15
+label MovePiece_14
+    goto MovePiece_2
+label MovePiece_3
+    push argument 1
+    push constant 80
+    eq
+    not
+    if-goto MovePiece_17
+    push local 2
+    push local 3
+    call GamePieces.draw_black_pawn 2
+    pop temp 0
+    push local 0
+    push local 1
+    push local 4
+    call GamePieces.draw_tile 3
+    pop temp 0
+    goto MovePiece_16
+label MovePiece_17
+label MovePiece_16
+    push argument 1
+    push constant 82
+    eq
+    not
+    if-goto MovePiece_19
+    push local 2
+    push local 3
+    call GamePieces.draw_black_rook 2
+    pop temp 0
+    goto MovePiece_18
+label MovePiece_19
+label MovePiece_18
+    push argument 1
+    push constant 72
+    eq
+    not
+    if-goto MovePiece_21
+    push local 2
+    push local 3
+    call GamePieces.draw_black_horse 2
+    pop temp 0
+    goto MovePiece_20
+label MovePiece_21
+label MovePiece_20
+    push argument 1
+    push constant 66
+    eq
+    not
+    if-goto MovePiece_23
+    push local 2
+    push local 3
+    call GamePieces.draw_black_bishop 2
+    pop temp 0
+    goto MovePiece_22
+label MovePiece_23
+label MovePiece_22
+    push argument 1
+    push constant 81
+    eq
+    not
+    if-goto MovePiece_25
+    push local 2
+    push local 3
+    call GamePieces.draw_black_queen 2
+    pop temp 0
+    goto MovePiece_24
+label MovePiece_25
+label MovePiece_24
+    push argument 1
+    push constant 75
+    eq
+    not
+    if-goto MovePiece_27
+    push local 2
+    push local 3
+    call GamePieces.draw_black_king 2
+    pop temp 0
+    goto MovePiece_26
+label MovePiece_27
+label MovePiece_26
+label MovePiece_2
+    push local 0
+    push local 1
+    push local 4
+    call GamePieces.draw_tile 3
+    pop temp 0
+    push constant 0
+    return
+function MovePiece.mod 2
+    push argument 0
+    push argument 1
+    call Math.divide 2
+    pop local 0
+    push argument 0
+    push local 0
+    push argument 1
+    call Math.multiply 2
+    sub
+    pop local 1
+    push local 1
+    return

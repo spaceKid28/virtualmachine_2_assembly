@@ -1,0 +1,132 @@
+function DrawPieces.drawpieces 3
+    push constant 0
+    pop local 0
+    push constant 0
+    pop local 1
+    push constant 0
+    pop local 2
+label DrawPieces_0
+    push local 1
+    push constant 5
+    lt
+    not
+    if-goto DrawPieces_1
+label DrawPieces_2
+    push local 2
+    push constant 5
+    lt
+    not
+    if-goto DrawPieces_3
+    push local 0
+    push constant 1
+    eq
+    not
+    if-goto DrawPieces_5
+    push constant 0
+    pop local 0
+    goto DrawPieces_4
+label DrawPieces_5
+    push constant 1
+    pop local 0
+label DrawPieces_4
+    push local 1
+    push local 2
+    push local 0
+    call GamePieces.draw_tile 3
+    pop temp 0
+    push local 2
+    push constant 1
+    add
+    pop local 2
+    goto DrawPieces_2
+label DrawPieces_3
+    push constant 0
+    pop local 2
+    push local 1
+    push constant 1
+    add
+    pop local 1
+    goto DrawPieces_0
+label DrawPieces_1
+    push constant 3
+    push constant 0
+    call GamePieces.draw_white_pawn 2
+    pop temp 0
+    push constant 3
+    push constant 1
+    call GamePieces.draw_white_pawn 2
+    pop temp 0
+    push constant 3
+    push constant 2
+    call GamePieces.draw_white_pawn 2
+    pop temp 0
+    push constant 3
+    push constant 3
+    call GamePieces.draw_white_pawn 2
+    pop temp 0
+    push constant 3
+    push constant 4
+    call GamePieces.draw_white_pawn 2
+    pop temp 0
+    push constant 1
+    push constant 0
+    call GamePieces.draw_black_pawn 2
+    pop temp 0
+    push constant 1
+    push constant 1
+    call GamePieces.draw_black_pawn 2
+    pop temp 0
+    push constant 1
+    push constant 2
+    call GamePieces.draw_black_pawn 2
+    pop temp 0
+    push constant 1
+    push constant 3
+    call GamePieces.draw_black_pawn 2
+    pop temp 0
+    push constant 1
+    push constant 4
+    call GamePieces.draw_black_pawn 2
+    pop temp 0
+    push constant 4
+    push constant 0
+    call GamePieces.draw_white_rook 2
+    pop temp 0
+    push constant 0
+    push constant 0
+    call GamePieces.draw_black_rook 2
+    pop temp 0
+    push constant 4
+    push constant 1
+    call GamePieces.draw_white_horse 2
+    pop temp 0
+    push constant 0
+    push constant 1
+    call GamePieces.draw_black_horse 2
+    pop temp 0
+    push constant 4
+    push constant 2
+    call GamePieces.draw_white_bishop 2
+    pop temp 0
+    push constant 0
+    push constant 2
+    call GamePieces.draw_black_bishop 2
+    pop temp 0
+    push constant 4
+    push constant 3
+    call GamePieces.draw_white_queen 2
+    pop temp 0
+    push constant 0
+    push constant 3
+    call GamePieces.draw_black_queen 2
+    pop temp 0
+    push constant 4
+    push constant 4
+    call GamePieces.draw_white_king 2
+    pop temp 0
+    push constant 0
+    push constant 4
+    call GamePieces.draw_black_king 2
+    pop temp 0
+    push constant 0
+    return

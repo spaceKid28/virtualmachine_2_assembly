@@ -1,0 +1,1454 @@
+function GamePieces.draw_white_pawn 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 1
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 4081
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 4081
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 4081
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 4081
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 4081
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 961
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 961
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 961
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 961
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 4081
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_black_pawn 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 0
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 4080
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 4080
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 4080
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 4080
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 4080
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 960
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 960
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 960
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 960
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 4080
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_black_rook 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 0
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 6552
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 6552
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_white_rook 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 1
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 6553
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 6553
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_black_horse 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 0
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 1536
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 8128
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 5984
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 6128
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 6136
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 6136
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 6016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 6016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 6016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 8128
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 16380
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 32766
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_white_horse 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 1
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 1537
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 8129
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 5985
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 6129
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 6137
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 6137
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 6017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 6017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 6017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 8129
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 16381
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 32767
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_white_bishop 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 960
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 576
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 576
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 960
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 3120
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 3120
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 1056
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 576
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 576
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 576
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 1056
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 2064
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 2064
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_black_bishop 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 961
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 577
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 577
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 961
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 3121
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 3121
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 1057
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 577
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 577
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 577
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 1057
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 2065
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 2065
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_white_king 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 384
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 384
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 384
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 384
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 25158
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 27607
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 30703
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 32767
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 32767
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 16386
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 8196
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 4104
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 8184
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_black_king 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 385
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 385
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 385
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 385
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 25159
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 27606
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 30702
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 32766
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 32766
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 16387
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 8197
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 4105
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 8185
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_white_queen 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 0
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 0
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 2016
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 4080
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 7192
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 14348
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 12300
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 12300
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 12300
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 12684
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 13196
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 14108
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 7992
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8176
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 14336
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 12288
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_black_queen 2
+    push argument 0
+    push constant 1024
+    call Math.multiply 2
+    push argument 1
+    push constant 2
+    call Math.multiply 2
+    add
+    pop local 0
+    push constant 16384
+    push local 0
+    add
+    pop local 1
+    push local 1
+    push constant 0
+    add
+    push constant 1
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 32
+    add
+    push constant 1
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 64
+    add
+    push constant 2017
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 96
+    add
+    push constant 4081
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 128
+    add
+    push constant 7193
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 160
+    add
+    push constant 14349
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 192
+    add
+    push constant 12301
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 224
+    add
+    push constant 12301
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 256
+    add
+    push constant 12301
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 288
+    add
+    push constant 12685
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 320
+    add
+    push constant 13197
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 352
+    add
+    push constant 14109
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 384
+    add
+    push constant 7993
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 416
+    add
+    push constant 8177
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 448
+    add
+    push constant 14337
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push local 1
+    push constant 480
+    add
+    push constant 12289
+    neg
+    call Memory.poke 2
+    pop temp 0
+    push constant 0
+    return
+function GamePieces.draw_tile 1
+    push constant 32
+    pop local 0
+    push argument 1
+    push local 0
+    call Math.multiply 2
+    pop argument 1
+    push argument 0
+    push local 0
+    call Math.multiply 2
+    pop argument 0
+    push argument 2
+    call Screen.setColor 1
+    pop temp 0
+    push argument 1
+    push argument 0
+    push argument 1
+    push local 0
+    add
+    push argument 0
+    push local 0
+    add
+    call Screen.drawRectangle 4
+    pop temp 0
+    push constant 0
+    return
