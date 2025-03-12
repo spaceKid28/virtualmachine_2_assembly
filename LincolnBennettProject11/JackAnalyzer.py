@@ -41,8 +41,9 @@ def main():
             tokens = Tokenizer(file_path + file + ".jack", file_path + "output/" + file + "T.xml")
             parsed = Parser(tokens.tokens, file_path + "/output/" + file + ".xml")
             parsed.compileClass()
-            symbolTabled = SymbolTableClass(parsed.xml_output)
-            print(symbolTabled.xml_input)
+            symbolTabled = SymbolTableClass()
+            print("\n")
+            print(parsed.xml_output)
     return
 
 if __name__ == "__main__":

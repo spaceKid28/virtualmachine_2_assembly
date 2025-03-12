@@ -1,5 +1,4 @@
 from SymbolTable import SymbolTableClass
-from VMWriter import VMWriter
 class Parser:
     
     binaryOp = {'+', '-', '*', '/', '|', '=', '&lt;', '&gt;', '&amp;'}
@@ -15,24 +14,22 @@ class Parser:
         self.output_filepath = output_filepath
         # this is what we are eventually writing to
         self.xml_output = ""
-
-        self.symbol_table_obj = SymbolTableClass() # Create SymbolTable Object 
-        self.current_subroutine = "" # keep track of both current subroutine and current class for current token self.tokens[self.index] is pointing to
-        self.current_class_name = "" 
-
-        output_file = output_filepath.replace('.xml', 'testing2.vm') #write to vm instead of .xml
-        self.vmWriter = VMWriter(output_file)
+        
+        # Initialize the symbol table
+        self.symbolTable = SymbolTableClass("")
+        self.currentSubroutine = None
+        self.currentClass = None
     
     # we run this method first, everytime
     def compileClass(self):
         self.nonterminal('class')
         self.writeToken() # note, this will be the class keyword
-        self.current_class_name = self.peek() # for seven this should be "MAIN"
-        self.writeToken() # note, this will be the class name (for example: main)
+        self.currentClass = self.writeToken() # note, this will be the class name (for example: main)
         self.writeToken() # note, this will always be {
 
-        self.symbol_table_obj.startSubroutine() # Everytime we start a class, we reset subroutine variables as well
-
+        # Reset the symbol table for this class
+        self.symbolTable.startSubroutine()
+        
         # Now we check for a classVarDec*
         # here we want to *peek* and see if it is either "static" or "field" without moving the index
         while self.peek() == "static" or self.peek() == "field":
@@ -46,70 +43,87 @@ class Parser:
         # gotta close <varDer> tag here we end nonterminal by popping of our list of nonterminal tags
         self.xml_output += self.nonterminal_tails.pop()
 
-        self.vmWriter.close() # write the output
+        # write the output
+        # self.write_output()
 
     def writeToken(self): # note that this method both increments to the next token (via self.index) and returns the token
-        
         tag, token = self.tokens[self.index]
-
-        if tag == "identifier": # added for project 11
+        
+        # Special handling for identifiers - check if we need to add symbol table info
+        if tag == "identifier":
             return self.writeIdentifier(token)
         
         self.xml_output += f"<{tag}> {token} </{tag}>\n"
         self.index += 1
         return token # added for project 11, cuz I need it for the symbol table
     
-    def writeIdentifier(self, token): # added for project 11
-        # must treat identifier's specially, we need their symbol table info to translate correctly
-
-        category = "" # is this a var, arg, static, field, class
-        used = True # are using this identifier or are we defining it
-        index = -1 # Needs to be some integers (type error otherwise)
-
-        if token in self.symbol_table_obj.subroutine_level_hmap: # check subroutine, then check class
-            category, type_val, index = self.symbol_table_obj.subroutine_level_hmap[token]
-        elif token in self.symbol_table_obj.class_level_hmap:
-            category, type_val, index = self.symbol_table_obj.class_level_hmap[token]
-        else: # symbol isn't in either symbol table
-            if token == self.current_class_name:
+    def writeIdentifier(self, token):
+        # This is a new method that writes identifiers with their symbol table information
+        
+        # Default values if not defined
+        category = "NONE"  # var, argument, static, field, class, subroutine
+        defining = False   # Whether the identifier is being defined or used
+        index = None       # Running index assigned by the symbol table
+        
+        # Try to determine identifier information based on context
+        # (This is complex and depends on where in the parsing we are)
+        # We need to determine if we're defining or using the identifier based on context
+        
+        # Check if the identifier is in the symbol table and get its information
+        try:
+            if token in self.symbolTable.subroutine_level_hmap:
+                kind, type_val, idx = self.symbolTable.subroutine_level_hmap[token]
+                category = kind
+                index = idx
+            elif token in self.symbolTable.class_level_hmap:
+                kind, type_val, idx = self.symbolTable.class_level_hmap[token]
+                category = kind
+                index = idx
+        except:
+            # If token isn't in the symbol table, it could be a class or subroutine name
+            if token == self.currentClass:
                 category = "class"
-            elif token == self.current_subroutine:
+            elif token == self.currentSubroutine:
                 category = "subroutine"
         
         # Add the identifier with its additional information to the XML output
         self.xml_output += f"<identifier> {token} </identifier>\n"
-        self.xml_output += f"<!-- category: {category}, defining: {not used}, index: {index if index is not None else 'None'} -->\n"
-
+        self.xml_output += f"<!-- category: {category}, defining: {defining}, index: {index if index is not None else 'None'} -->\n"
+        
         self.index += 1
         return token
-
+    
     def write_output(self):
         with open(self.output_filepath, 'w') as file:
             file.write(self.xml_output)
         return
 
     def compileClassVarDec(self):
-        tmp_hmap = {"static": "STATIC", "field": "FIELD"} # need to convert Jack static to VM STATIC....
-
         self.nonterminal("classVarDec")
-        kind = self.peek() # project 11 add, need to know this stuff for symbol table
-        kind = tmp_hmap[kind]
-        self.writeToken() # need to write 'var'
-        type = self.peek()
-        self.writeToken() # write type
-        name = self.peek() 
+        kind = self.writeToken() # need to write 'static' or 'field'
+        type_val = self.writeToken() # write type
+        
+        # Convert the Jack variable kind to symbol table kind
+        if kind == "static":
+            st_kind = "STATIC"
+        else:  # field
+            st_kind = "FIELD"
+        
+        # Mark the next identifier as being defined
+        name = self.peek()
+        defining = True
+        
         self.writeToken() # write the name of var
-        used = False
-
-        self.symbol_table_obj.Define(name, type, kind) # project 11, we know its a class variable declaration so we call define
+        # Add to symbol table
+        self.symbolTable.Define(name, st_kind, type_val)
 
         # going to peek and see if we have more variables (var int age, int grade)
         while self.peek() == ",":
-            self.writeToken() # write the comman
+            self.writeToken() # write the comma
             name = self.peek() # if there are multiple variables being declared, then we add all of them to symbol table
-            used = False
+            defining = True
             self.writeToken() # write the var name
-            self.symbol_table_obj.Define(name, type, kind) # project 11, we know its a class variable declaration so we call define
+            self.symbolTable.Define(name, st_kind, type_val)
         self.writeToken() # write the ;
         
         # gotta close <varDer> tag here we end nonterminal by popping of our list of nonterminal tags
@@ -119,50 +133,47 @@ class Parser:
         self.nonterminal('parameterList')
         # if the token is not )
         if self.peek() != ")":
-            type_val = self.peek()
-            self.writeToken()  # Parameter type
+            type_val = self.writeToken()  # Parameter type
             name = self.peek()
             self.writeToken()  # Parameter name
-            self.symbol_table_obj.Define(name, "ARG", type_val)
+            self.symbolTable.Define(name, "ARG", type_val)
             
             # Handle multiple parameters
             while self.peek() == ",":
                 self.writeToken()  # Write comma
-                type_val = self.peek()
-                self.writeToken()  # Parameter type
+                type_val = self.writeToken()  # Parameter type
                 name = self.peek()
                 self.writeToken()  # Parameter name
-                self.symbol_table_obj.Define(name, "ARG", type_val)
+                self.symbolTable.Define(name, "ARG", type_val)
+                
         # here we end nonterminal by popping of our list of nonterminal tags
         self.xml_output += self.nonterminal_tails.pop()
     
     def writeParam(self):
-        type_val = self.peek()
-        self.writeToken() # write the parameter type (int)
+        type_val = self.writeToken() # write the parameter type (int)
         name = self.peek()
-        self.writeToken() # wriet the parameter (a)
-        self.symbol_table_obj.Define(name, "ARG", type_val)
+        self.writeToken() # write the parameter (a)
+        self.symbolTable.Define(name, "ARG", type_val)
+        
         # if there is a comma, we add it
         if self.peek() == ",":
             self.writeToken()
         
 
     def compileSubroutine(self):
-        self.symbol_table_obj.startSubroutine() # must reset the subroutine symbol table
-
+        # Reset the subroutine-level symbol table
+        self.symbolTable.startSubroutine()
+        
         self.nonterminal("subroutineDec")
-        subroutine_type = self.peek()
-        self.writeToken() # we write the type of subroutine: "constructor, method, function"
-        self.writeToken() #  we write the return type of the function type (ie <keyword> void </keyword> or int)
-        self.current_subroutine = self.peek()
-        self.writeToken() # we write the name of the function (ie main)
-        full_function_name = f"{self.current_class_name}.{self.current_subroutine}"
+        subroutine_type = self.writeToken() # we write the type of subroutine: "constructor, method, function"
+        self.writeToken() # we write the return type of the function type (ie <keyword> void </keyword> or int)
+        self.currentSubroutine = self.writeToken() # we write the name of the function (ie main)
         self.writeToken() # we write (
-
+        
         # If this is a method, add 'this' as first argument
         if subroutine_type == "method":
-            self.symbol_table_obj.Define("this", "ARG", self.current_class_name)
-
+            self.symbolTable.Define("this", "ARG", self.currentClass)
+            
         self.compileParameterList()
         self.writeToken() # we write )
 
@@ -171,14 +182,8 @@ class Parser:
         self.writeToken() # we write the open bracket {
 
         # Here we look for varDec
-        var_count = 0
         while self.peek() == "var":
-            var_count += self.compileVarDec()
-            
-        # Write the VM function declaration
-        self.vmWriter.writeFunction(full_function_name, var_count)
-
-
+            self.compileVarDec()
         self.CompileStatements()
         self.writeToken() # we write the close bracket }
 
@@ -187,38 +192,33 @@ class Parser:
 
         # here we end nonterminal by popping of our list of nonterminal tags
         self.xml_output += self.nonterminal_tails.pop()
-
+        
         # Reset the current subroutine name
-        self.current_subroutine = None
-
-
+        self.currentSubroutine = None
+        
     def compileVarDec(self):
         self.nonterminal('varDec')
         self.writeToken()  # get 'var' keyword
         type_val = self.writeToken()  # get var type
         name = self.peek()
         self.writeToken()  # get var name
-        self.symbol_table_obj.Define(name, "VAR", type_val)
-
-        var_count = 1
+        self.symbolTable.Define(name, "VAR", type_val)
         
         while self.peek() == ",":
             self.writeToken()  # get ',' symbol
             name = self.peek()
             self.writeToken()  # get var name
-            self.symbol_table_obj.Define(name, "VAR", type_val)
-            var_count += 1
+            self.symbolTable.Define(name, "VAR", type_val)
+            
         self.writeToken()  # get ';' symbol
         # here we end nonterminal by popping of our list of nonterminal tags
         self.xml_output += self.nonterminal_tails.pop()
-
-        return var_count
         
 
     def peek(self):
         return self.tokens[self.index][1]
     
-    def peekTag(self):
+    def peekToken(self):
         return self.tokens[self.index][0]
     
     def CompileStatements(self):
@@ -239,20 +239,13 @@ class Parser:
     
     def CompileExpressionList(self):
         self.nonterminal("expressionList")
-        nArgs = 0  # Count the number of arguments
-        
         if self.existExpression():
             self.compileExpression()
-            nArgs += 1
-            
         while self.peek() == ",":  # case of multiple expressions
             self.writeToken()  # get ',' symbol
             self.compileExpression()
-            nArgs += 1
-            
         # gotta close tag
         self.xml_output += self.nonterminal_tails.pop()
-        return nArgs
     
     def writeArrayIndex(self):
         self.writeToken() # write bracket
@@ -261,40 +254,26 @@ class Parser:
 
     def compileTerm(self):
         self.nonterminal("term")
-        if self.peekTag() == "integerConstant":
-            # Push integer constant to the stack
-            value = self.peek()
-            self.writeToken()
-            self.vmWriter.writePush("constant", value)
-        elif self.peekTag() == "stringConstant" or self.peek() in self.keywordConstant:
+        if self.peekToken() in ["stringConstant", "integerConstant"] or self.peek() in self.keywordConstant:
             self.writeToken() # write the constant
-        elif self.peekTag() == 'identifier':
+        elif self.peekToken() == 'identifier':
             identifier = self.writeToken()  # Could be variable, array, or subroutine call
             
             if self.peek() == "[":
                 self.writeArrayIndex()
             elif self.peek() == "(":
                 self.writeToken()  # get '(' symbol
-                nArgs = self.CompileExpressionList()
+                self.CompileExpressionList()
                 self.writeToken()  # get ')' symbol
-                # Call the function
-                self.vmWriter.writeCall(f"{identifier}", nArgs)
             elif self.peek() == ".":  # case of subroutine call
                 self.writeToken()  # get '.' symbol
-                subroutine_name = self.writeToken()  # get subroutine name
+                self.writeToken()  # get subroutine name
                 self.writeToken()  # get '(' symbol
-                nArgs = self.CompileExpressionList()
+                self.CompileExpressionList()
                 self.writeToken()  # get ')' symbol
-                # Call the function with the class/object name
-                self.vmWriter.writeCall(f"{identifier}.{subroutine_name}", nArgs)
         elif self.peek() in self.unaryOp:
-            op = self.writeToken()  # get unary operation symbol
+            self.writeToken()  # get unary operation symbol
             self.compileTerm()
-            # Write the VM command for the unary operation
-            if op == '-':
-                self.vmWriter.writeArithmetic('neg')
-            elif op == '~':
-                self.vmWriter.writeArithmetic('~')
         elif self.peek() == "(":
             self.writeToken()  # get '(' symbol
             self.compileExpression()
@@ -306,15 +285,9 @@ class Parser:
     def compileExpression(self):
         self.nonterminal('expression')
         self.compileTerm()
-        
         while self.peek() in self.binaryOp:
-            # Save the binary operator
-            op = self.writeToken()
+            self.writeToken()
             self.compileTerm()
-            
-            # Generate VM code for the binary operation
-            self.vmWriter.writeArithmetic(op)
-            
         # gotta close tag
         self.xml_output += self.nonterminal_tails.pop()
          
@@ -328,25 +301,13 @@ class Parser:
         self.writeToken() # write the do word
         
         # here we write the subroutine call
-        class_or_var_name = self.writeToken() # get name of class/variable
-        
+        self.writeToken() # get name of subroutine
         if self.peek() == '.':
             self.writeToken() # get .
-            subroutine_name = self.writeToken()  # write subroutine name
-            full_name = f"{class_or_var_name}.{subroutine_name}"
-        else:
-            # Method call on this class
-            full_name = f"{self.current_class_name}.{class_or_var_name}"
-            
+            self.writeToken()  # write subroutine name
         self.writeToken() # get the '('
-        nArgs = self.CompileExpressionList()
+        self.CompileExpressionList()
         self.writeToken() # write ')'
-        
-        # Generate VM code for the call
-        self.vmWriter.writeCall(full_name, nArgs)
-        
-        # For do statements, we need to pop the return value which is not used
-        self.vmWriter.writePop("temp", 0)
         
         self.writeToken() # write the ';'
         # close tag
@@ -354,13 +315,13 @@ class Parser:
 
     def compileLet(self):
         self.nonterminal("letStatement")
-        self.writeToken()
-        self.writeToken()
+        self.writeToken()  # write 'let'
+        self.writeToken()  # write variable name (already handled by writeIdentifier)
         if self.peek() == '[':
             self.writeArrayIndex()
-        self.writeToken()
+        self.writeToken()  # write '='
         self.compileExpression()
-        self.writeToken()
+        self.writeToken()  # write ';'
 
         # close tag
         self.xml_output += self.nonterminal_tails.pop()
@@ -399,16 +360,8 @@ class Parser:
     def compileReturn(self):
         self.nonterminal("returnStatement")
         self.writeToken() # write 'return'
-        
-        if self.existExpression():
+        while self.existExpression():
             self.compileExpression()
-        else:
-            # If no expression after return, push 0
-            self.vmWriter.writePush("constant", 0)
-            
-        # Write the VM return command
-        self.vmWriter.writeReturn()
-        
         self.writeToken() # write ';'
         # close tag
         self.xml_output += self.nonterminal_tails.pop()
@@ -416,5 +369,3 @@ class Parser:
     def nonterminal(self, tag):
         self.xml_output += f"<{tag}>\n"
         self.nonterminal_tails.append(f"</{tag}>\n")
-
-    
